@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Django App</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+   
+   
+    <ul>
+        {% for obj in objects %}
+        <li> {{obj.numero_cotizacion}}- {{obj.fecha_solicitud}} - {{obj.fecha_solicitud}}  {{obj.nombre_cliente}} -  {{obj.nombre_gerente}} {{obj.tecnologia_fabricacion}}</li>
+        {% endfor %}
+   
+    </ul>
+
+    <div class="container mt-5">
+        <h1>Lista de Productos</h1>
+        <button type="button" class="btn btn-primary"> <a href="{% url 'create' %}">Crear nuevo Check</a></button>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">editar</th>
+                    <th scope="col">Numero de cotizacion</th>
+                    <th scope="col">Fecha de solicitud</th>
+                    <th scope="col">Nombre de cliente</th>
+                    <th scope="col">Nombre de gerente</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Ver</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in objects %}
+                <tr>
+                    <th scope="row"> <a href= "{% url 'editar' obj.id %}">{{obj.id}}</a></th>
+                    <th scope="row"> <a href= "{% url 'editar' obj.id %}">{{obj.numero_cotizacion}}</a></th>
+                    <td> {{obj.fecha_solicitud}}</td>
+                    <td>{{obj.nombre_cliente}} </td>
+                    <td>{{obj.nombre_gerente}}</td>
+                    {% for status in  obj.estatus.all %}
+                  <td>  {{status.nombre}}  </td>
+                    {%endfor %}
+                    {% for category in  obj.categoria.all %}
+                  <td>  {{category.nombre}}  </td>
+                    {%endfor %}
+                    <td> <a href= "{% url 'ver' obj.id %}"> {{obj.fecha_solicitud}}</a></td>
+
+                    <td> <a href= "{% url 'pdf' obj.id %}"> {{obj.numero_cotizacion}}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+ 
+</body>
+</html>
