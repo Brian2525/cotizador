@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+{% load static %}
+
+
+<div class="container mt-5">
+    <h2 class="mb-4">Vendedores</h2>
+
+
+
+     <button type="button" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <a href="{% url 'vendedorC' %}" ><span>Nuevo vendedor</span></a>
+                    </button>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nombre </th>
+                <th scope="col">Numero de contacto</th>
+                <th scope="col">Email</th>
+                <th scope="col">Facebook</th>
+                <th scope="col">Linkedin</th>
+                 <th scope="col"> X - Twitter</th>
+                <th scope="col">Sitio web</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {%if object_list %}
+           {%for obj in object_list %}
+                <tr>
+                
+                    <th scope="row">{{obj.numero_contacto}} </th>
+                    <td > {{obj.email}}</td>
+                    <td > {{obj.facebook}}</td>
+                    
+                    <td>{{obj.linkedin}}  </td>
+                    <td>{{obj.sitio_web}} s</td>
+                    <td>{{obj.video_corporativo}} </td>
+                    <td>
+                                <a href="{% url 'bc' obj.id  %}">  <i class="bi bi-eye-fill"></i></a>
+                                <a href="{% url 'vendedorU' obj.id  %}"> <i class="bi bi-pencil-square"></i></a>
+                                <a href="{% url 'vendedorD' obj.id  %}"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+            {%endfor%}
+        {%else%}
+
+        <h1>No hay elementos a mostrar</h1>
+            <!-- More rows as needed -->
+        {%endif%}
+
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

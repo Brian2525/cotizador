@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% load static %}
+
+
+
+{% block content %}
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <a href="{% url 'create' %}" ><span>Nuevo check</span></a>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    
+                </div>
+            </nav>
+
+            <div class="container mt-5">
+                <h1>Checks</h1>
+                
+                <table class="table table-striped">
+                        {% if check %}
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Numero de cotizacion</th>
+                                        <th scope="col">Fecha de solicitud</th>
+                                        
+                                        <th scope="col">Nombre de gerente</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Fecha de expiracion</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                    </thead>
+                            {% for obj in check %}
+                                {%if obj.autor.id == user.id %}
+                                    <tbody>
+                                    <tr>
+                                    <th scope="row"> {{obj.numero_cotizacion}}</th>
+                                        <td> {{obj.fecha_solicitud}}</td>                               
+
+                                        <td>{{obj.nombre_gerente}}</td>
+                                        
+                                        {% for status in  obj.estatus.all %}
+                                        <td>  {{status.nombre}}  </td>
+                                        {%endfor %}
+
+                                        {% for category in  obj.categoria.all %}
+                                        <td>  {{category.nombre}}  </td>
+                                        {%endfor %}
+                                        
+                                        <td>{{obj.fecha_expiracion}} {{obj.vigente}}</td>
+
+                                        <td>
+                                        {%if obj.vigente %}
+                                        <a href="{% url 'ver' obj.id  %}">  <i class="bi bi-eye-fill"></i></a>
+                                        <a href="{% url 'editar' obj.id  %}"> <i class="bi bi-pencil-square"></i></a>
+                                        <a href="{% url 'pdf' obj.id  %}">  <i class="bi bi-file-earmark-pdf"></i></a>
+                                        <a href="{% url 'delete' obj.id  %}"><i class="bi bi-trash-fill"></i></a>
+                                        </td>
+                                        {% else %}
+                                        <td> <a href="{% url 'renovar' obj.id  %}">  Es necesario renovar  </a> </td>
+                                        {% endif %}
+
+                                        
+                                    </tr>
+                                    </tbody>
+                                {% else %}                     
+                                <tbody>
+                                    <tr>
+                                    <th scope="row"> {{obj.numero_cotizacion}}</th>
+                                        <td> {{obj.fecha_solicitud}}</td>
+                                    
+
+                                        <td>{{obj.nombre_gerente}}</td>
+                                        
+                                        {% for status in  obj.estatus.all %}
+                                        <td>  {{status.nombre}}  </td>
+                                        {%endfor %}
+
+                                        {% for category in  obj.categoria.all %}
+                                        <td>  {{category.nombre}}  </td>
+                                        {%endfor %}
+
+                                        <td>
+                                        <a href="{% url 'ver' obj.id  %}">  <i class="bi bi-eye-fill"></i></a>
+                                        <a href="{% url 'editar' obj.id  %}"> <i class="bi bi-pencil-square"></i></a>
+                                        <a href="{% url 'pdf' obj.id  %}">  <i class="bi bi-file-earmark-pdf"></i></a>
+                                        <a href="{% url 'delete' obj.id  %}"><i class="bi bi-trash-fill"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                        <h1>No hay elementos a mostrar</h1>
+                        {% endif %}
+                </table>
+                    
+                
+            </div>
+        </div>
+    
+ {% endblock %}

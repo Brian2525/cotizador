@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+{% load static %}
+    
+
+
+    <div class="container mt-5">
+        <h1>Checks</h1>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    
+                    <th scope="col">Numero de cotizacion</th>
+                    <th scope="col">Fecha de solicitud</th>
+                    <th scope="col">Nombre de cliente</th>
+                    <th scope="col">Nombre de gerente</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Categoria</th>
+                    
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if object_list %}
+                    {% for obj in object_list %}
+                    <tr>
+                            <th scope="row"> {{obj.numero_cotizacion}}</th>
+                            <td> {{obj.fecha_solicitud}}</td>     
+                            
+                            <td>{{obj.nombre_gerente}}</td>
+                            {% for status in  obj.estatus.all %}
+                            <td>  {{status.nombre}}  </td>
+                            {%endfor %}
+                            {% for category in  obj.categoria.all %}
+                            <td>  {{category.nombre}}  </td>
+                            {%endfor %}
+                            <td>
+                            <a href="{% url 'ver' obj.id  %}">  <i class="bi bi-eye-fill"></i></a>
+                            <a href="{% url 'editar' obj.id  %}"> <i class="bi bi-pencil-square"></i></a>
+                            <a href="{% url 'pdf' obj.id  %}">  <i class="bi bi-file-earmark-pdf"></i></a>
+                            <a href="{% url 'delete' obj.id  %}"><i class="bi bi-trash-fill"></i></a>
+                            </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                <h1>No hay elementos a mostrar</h1>
+                {% endif %}
+
+            </tbody>
+        </table>
+    </div>
+ {% endblock %}

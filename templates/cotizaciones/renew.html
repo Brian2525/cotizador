@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Renovar{% endblock %}
+
+{% block content %}
+{% load static %}
+    
+<li><a href="{% url 'index'%}">Home</a></li>
+
+<li>User id {{ user.id }}</li>
+<li>User: {{ user.get_username }}</li>
+
+    <div class="container mt-5">
+        <h1>Expirados</h1>
+        <table class="table table-striped">
+                {% if check %}
+                <thead>
+                            <tr>
+                                 <th scope="col">Numero de cotizacion</th>
+                                 <th scope="col">Fecha de vencimiento</th>
+                                 <th scope="col">Estatus</th>
+                            </tr>
+                            </thead>
+                    {% for obj in  check %}
+                            <tbody>
+                                <tr>                         
+                                    <td>{{obj.numero_cotizacion}}</td>
+                                    <td>{{obj.fecha_expiracion}} </td>
+                                   {% if  obj.vigente  %}
+                                    <td>El objeto esta vigente</td>
+                                    {% else %}
+                                    <td> 
+                                    <form method="POST" action="{% url 'renovar' obj.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit">renovar </button>
+                                    </form>
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                                
+                                </tbody>
+                                
+                    {% endfor %}
+                {% else %}
+                    <h1>No hay elementos a mostrar</h1>
+                {% endif %}
+        </table>
+                    
+                
+    </div>
+ {% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Create{% endblock %}
+
+{% load static %}
+ {% block extra_css %}
+<link rel="stylesheet" href="{% static 'cotizaciones/css/create.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+{% endblock %}
+{% block content %}
+
+<body>
+
+
+<!-- MultiStep Form -->
+<div class="container-fluid" id="grad1">
+    <div class="row justify-content-center mt-0">
+        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2><strong>Create check</strong></h2>
+                <p>Llena todos los campos y después da en siguiente</p>
+                <div class="row">
+                    <div class="col-md-12 mx-0">
+                        
+                        
+                        <form method="POST" id="msform">
+                            {% csrf_token %}
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="first"><strong>Caracteristicas generales del proyecto</strong></li>
+                                <li id="second"><strong>Caracteristicas del sustrato + respaldo</strong></li>
+                                <li id="third"><strong>Caracteristicas del adhesivo + condiciones ambientales pre y post aplicacion</strong></li>
+                                <li id="fifth"><strong>Manga o IML </strong></li>
+                                <li id="confirm"><strong>Confirmacion</strong></li>
+                            </ul>
+                            <!-- fieldsets -->
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Caracteristicas generales del proyecto</h2>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label >Nombre gerente {{ form.nombre_gerente}}</label>
+                                            <label >Fecha solicitud {{ form.fecha_solicitud}}</label>
+                                            <label >Numero de cotizacion LT  {{ form.numero_cotizacion}}</label>
+                                            <label >Nombre empresa {{ form.nombre_empresa}}</label>
+                                            
+                                        </div>
+                                        <div class="col-6">
+                                            <label >Nombre proyecto {{ form.nombre_proyecto}}</label>
+                                            <label>Volumen estimado {{ form.volumen_estimado}}</label>
+                                            <label >Producto nuevo  {{ form.producto_nuevo}}</label>
+                                            <label >Numero de tintas {{ form.numero_tintas}}</label>
+                                            <label >Tipo de producto  {{ form.tipo_producto}}</label>
+                                            <label class="form-select">Tecnologia de fabricacion {{ form.tecnologia_fabricacion}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="button" name="next" class="next action-button" value="Siguiente"/>
+                            </fieldset>
+                            
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Caracteristicas del sustrato + respaldo</h2>
+                                   <label >Mottivo rechazo{{ form.motivo_rechazo}}</label>
+                                   <label >Luegar entrega{{ form.lugar_entrega}}</label>
+                                    
+                                    <label >Precio objetivo {{ form.precio_objetivo}}</label>
+                                    <label >comentarios adicionales{{ form.comentarios_adicionales}}</label>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Anterior"/>
+                                <input type="button" name="next" class="next action-button" value="Siguiente"/>
+                            </fieldset>
+
+
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Caracteristicas del adhesivo + condiciones ambientales pre y post aplicacion </h2>
+                                    <label >Frecuencia de compra{{ form.frecuencia_compra}}</label>
+                                    <label >Estatus {{ form.estatus}}</label>
+                                    <label >Categoria{{ form.categoria}}</label>
+                                    <label >Producto o sector de uso  final ------------------------</label>
+                                    <label >AQL----------------</label>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Anterior"/>
+                                <input type="button" name="next" class="next action-button" value="Siguiente"/>
+                            </fieldset>
+
+                           
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Payment Information</h2>
+                                    <div class="radio-group">
+                                        <div class='radio' data-value="credit"><img src="https://i.imgur.com/XzOzVHZ.jpg" width="200px" height="100px"></div>
+                                        <div class='radio' data-value="paypal"><img src="https://i.imgur.com/jXjwZlj.jpg" width="200px" height="100px"></div>
+                                        <br>
+                                    </div>
+                                    
+                                   
+
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+
+                                <button type="submit" class="btn btn-secondary mb-3  action-button">Crear</button>
+                                
+                        
+
+
+                            </fieldset>
+                            
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title text-center">Success !</h2>
+                                    <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3">
+                                            <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image">
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-7 text-center">
+                                            <h5>Has creado el check</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+    {% block extra_js %}
+        <script src="{% static 'cotizaciones/js/create.js' %}"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    {% endblock %}
