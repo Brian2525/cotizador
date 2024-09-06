@@ -13,6 +13,7 @@ urlpatterns=[
     path('pdf/<int:pk>/', views.PdfView.as_view(), name='pdf'),
     path('renovaciones/<int:id>', views.renovaciones, name='renovar'),
     path('accounts/', include('django.contrib.auth.urls')),
+   
 
 ]
 

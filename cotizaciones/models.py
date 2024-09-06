@@ -31,6 +31,8 @@ class Categoria(models.Model):
         ordering=['id']
 
 class Check(models.Model):
+    STATUS_CHOICES = [('pendiente', 'pendiente'),('aprobado', 'aprobado'),('rechazado', 'rechazado')]
+
     nombre_gerente = models.CharField(max_length=100, null=True)
     numero_cotizacion = models.IntegerField(null=True,  blank=True)
     nombre_empresa = models.CharField(max_length=100, null=True, blank=True ) 
@@ -46,9 +48,10 @@ class Check(models.Model):
     comentarios_adicionales = models.TextField(blank=True, null=True)
     frecuencia_compra = models.CharField(blank=True, max_length=100, null=True)
     estatus=models.ManyToManyField(Status, related_name='status', blank=True)
+    estado=models.CharField(max_length=10, choices=STATUS_CHOICES, default='pendiente', blank=True)
     motivo_rechazo =models.CharField( blank=True, max_length=100)
     autor=models.ForeignKey(User, on_delete=models.SET_NULL, null=True) 
-    fecha_expiracion=models.DateTimeField(default=timezone.now() + timedelta (minutes=3))
+    fecha_expiracion=models.DateTimeField(default=timezone.now() + timedelta (minutes=10))
     vigente=models.BooleanField(default=True, null=True) #Vigencia del check
     cliente=models.CharField(max_length=100, null=True,  blank=True)
     categoria=models.ManyToManyField(Categoria, related_name='relevancia_check', blank=True) # relevancia de la categoria

@@ -6,7 +6,7 @@
 {% block content %}
 {% load static %}
     
-
+ <div id="content">
 
     <div class="container mt-5">
         <h1>Checks</h1>
@@ -21,7 +21,6 @@
                     <th scope="col">Nombre de gerente</th>
                     <th scope="col">Status</th>
                     <th scope="col">Categoria</th>
-                    
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -33,9 +32,8 @@
                             <td> {{obj.fecha_solicitud}}</td>     
                             
                             <td>{{obj.nombre_gerente}}</td>
-                            {% for status in  obj.estatus.all %}
-                            <td>  {{status.nombre}}  </td>
-                            {%endfor %}
+                             <td>{{obj.estado}}</td>
+                            
                             {% for category in  obj.categoria.all %}
                             <td>  {{category.nombre}}  </td>
                             {%endfor %}
@@ -54,4 +52,14 @@
             </tbody>
         </table>
     </div>
+</div>
+
+
+
+
+
+
  {% endblock %}
+
+
+ 

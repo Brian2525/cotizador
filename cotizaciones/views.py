@@ -32,11 +32,12 @@ from cotizador import settings
 
 import os
 from django.conf import settings
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse, JsonResponse
 from django.template.loader import get_template, render_to_string
 from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
 
+#CRUD 
 
 class Check_control(LoginRequiredMixin): 
     @login_required
@@ -47,7 +48,7 @@ class Check_control(LoginRequiredMixin):
                 if form.is_valid():
                     form.instance.autor = request.user
                     form.save()
-                    return redirect('list') 
+                    return redirect('cotizaciones') 
             else:
                 form=CheckForm()
             return render(request, 'cotizaciones/create.html', {'form': form })
@@ -72,19 +73,22 @@ class Check_control(LoginRequiredMixin):
             print('No es valido')
         form=CheckForm(instance=check) 
         return render(request, 'cotizaciones/edit.html', {'form': form })
-    
+
+
+
+
     @login_required
     def delete(request, id):
         check=get_object_or_404(Check, id=id, autor_id=request.user)
         check.delete()
         return redirect('cotizaciones')
 
-
-
+#Vistas
 
 class list_check(LoginRequiredMixin,ListView):
     model=Check
-   
+
+
 
 
 def list(request): 
@@ -99,8 +103,12 @@ def list(request):
          return redirect('/accounts/login/')
 
 
+        
 
 
+
+
+#Renovaciones
 def renovaciones(request, id ):
     check=Check.objects.filter(id=id)
     if request.method=='POST':
