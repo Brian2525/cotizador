@@ -5,11 +5,10 @@ from . import views
 
 urlpatterns=[
     path('vendedores',views.listar_vendedores.as_view(), name='vendedores'),
-    path('bc/<int:pk>',views.bc.as_view(), name='bc'),
-    path('EVendedor/<int:pk>',views.bc.as_view(), name='vendedorU'),
+    path('vendedor/<int:pk>',views.vendedor.as_view(), name='vendedor'),
+    path('eVendedor/<int:id>',views.update_vendedor, name='vendedorU'),
     path('Cvendedor',views.Cvendedor, name='vendedorC'),
     path('eliminarVendedor/<int:id>',views.delete, name='vendedorD'),
-
-
+    path('bc/<int:id>',views.bc, name='bc'),
 
 ]

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil Personal</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        
+        <div class="card">
+          <div class="card-header bg-info text-white">
+            <h2 class="text-center">Mi Perfil Personal</h2>
+          </div>
+
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>Nombre:</strong> {{vendedor.nombre}}
+              </li>
+              <li class="list-group-item">
+                <strong>Número de Contacto:</strong> {{vendedor.numero_contacto}}
+              </li>
+              <li class="list-group-item">
+                <strong>Email:</strong> {{vendedor.email}}
+              </li>
+              <li class="list-group-item">
+                <strong>Facebook:</strong> <a href="{{vendedor.facebook}}" target="_blank">{{vendedor.facebook}}</a>
+              </li>
+              <li class="list-group-item">
+                <strong>Sitio Web:</strong> <a href="{{vendedor.sitio_web}}" target="_blank">www.juanperez.com</a>
+              </li>
+              <li class="list-group-item">
+                <strong>Video Corporativo:</strong> <a href="https://www.youtube.com/watch?v=video" target="_blank">Ver video</a>
+              </li>
+            </ul>
+          </div>
+        </div><!--end card-->
+        
+        <!--Form-->
+         <div class="container">
+        <h1>Por favor dejanos tus datos para contactarte</h1>
+        <div class='mb-3'>
+          <form method="post">
+              {% csrf_token %}
+              {{form.as_p}}
+              <button type="submit" class="btn btn-secondary mb-3">Guardar</button>
+          </form>
+        </div>
+        <!--end form-->
+
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -27,6 +27,7 @@
                  <th scope="col"> X - Twitter</th>
                 <th scope="col">Sitio web</th>
                 <th scope="col">Acciones</th>
+                <th scope="col">Business Card</th>
             </tr>
         </thead>
         <tbody>
@@ -42,10 +43,11 @@
                     <td>{{obj.sitio_web}} s</td>
                     <td>{{obj.video_corporativo}} </td>
                     <td>
-                                <a href="{% url 'bc' obj.id  %}">  <i class="bi bi-eye-fill"></i></a>
-                                <a href="{% url 'vendedorU' obj.id  %}"> <i class="bi bi-pencil-square"></i></a>
-                                <a href="{% url 'vendedorD' obj.id  %}"><i class="bi bi-trash-fill"></i></a>
+                        <a href="{% url 'bc' obj.id  %}">  <i class="bi bi-eye-fill"></i></a>
+                        <a href="{% url 'vendedorU' obj.id  %}"> <i class="bi bi-pencil-square"></i></a>
+                        <a href="{% url 'vendedorD' obj.id  %}"><i class="bi bi-trash-fill"></i></a>
                     </td>
+                    <td><a href="{% url 'bc' obj.id  %}">business card  </a> </td>
                 </tr>
             {%endfor%}
         {%else%}

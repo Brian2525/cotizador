@@ -32,9 +32,10 @@ class Categoria(models.Model):
 
 class Check(models.Model):
     STATUS_CHOICES = [('pendiente', 'pendiente'),('aprobado', 'aprobado'),('rechazado', 'rechazado')]
+    PRODUCT_CLASIFICATIOM= [('si', 'si'),('no', 'no')]
 
     nombre_gerente = models.CharField(max_length=100, null=True)
-    numero_cotizacion = models.IntegerField(null=True,  blank=True)
+    numero_cotizacion = models.IntegerField(max_length=10, null=True,  blank=True)
     nombre_empresa = models.CharField(max_length=100, null=True, blank=True ) 
     nombre_proyecto = models.CharField(max_length=100, null=True, blank=True)
     volumen_estimado = models.IntegerField(null=True,blank=True)
@@ -43,12 +44,12 @@ class Check(models.Model):
     lugar_entrega = models.CharField(max_length=100, null=True, blank=True)
     producto_nuevo = models.BooleanField(default=False, null=True, blank=True)
     fecha_solicitud = models.DateField(null=True, blank=True)
-    precio_objetivo = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    precio_objetivo = models.IntegerField(max_length=10, null=True, blank=True)
     tipo_producto = models.CharField(max_length=100, null=True, blank=True)
-    comentarios_adicionales = models.TextField(blank=True, null=True)
+    comentarios_adicionales = models.TextField(max_length=300, blank=True, null=True) #por si existe algun requerimiento en especifico para el proyecto
     frecuencia_compra = models.CharField(blank=True, max_length=100, null=True)
-    estatus=models.ManyToManyField(Status, related_name='status', blank=True)
-    estado=models.CharField(max_length=10, choices=STATUS_CHOICES, default='pendiente', blank=True)
+    estatus=models.ManyToManyField(Status, related_name='status', blank=True) # El estatus se refiere al estado en el pipeline de ventas 
+    estado=models.CharField(max_length=10, choices=STATUS_CHOICES, default='pendiente', blank=True) #Este estado se refiere a la clasificacion de IDI. 
     motivo_rechazo =models.CharField( blank=True, max_length=100)
     autor=models.ForeignKey(User, on_delete=models.SET_NULL, null=True) 
     fecha_expiracion=models.DateTimeField(default=timezone.now() + timedelta (minutes=10))
