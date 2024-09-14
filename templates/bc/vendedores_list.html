@@ -8,13 +8,13 @@
 
 <div id="content">
 <div class="container mt-5">
-    <h2 class="mb-4">Vendedores</h2>
+    <h2 class="mb-4">Gerentes</h2>
 
 
 
      <button type="button" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
-                        <a href="{% url 'vendedorC' %}" ><span>Nuevo vendedor</span></a>
+                        <a href="{% url 'vendedorC' %}" ><span>Agreagar nuevo gerente</span></a>
                     </button>
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
@@ -35,7 +35,8 @@
            {%for obj in object_list %}
                 <tr>
                 
-                    <th scope="row">{{obj.numero_contacto}} </th>
+                    <th scope="row">{{obj.nombre}} </th>
+                    <td > {{obj.numero_contacto}}</td>
                     <td > {{obj.email}}</td>
                     <td > {{obj.facebook}}</td>
                     

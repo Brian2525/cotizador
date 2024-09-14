@@ -50,7 +50,7 @@
                                     <tr>
                                      <th scope="row"> {{obj.estado}}</th>
                                     <td> {{obj.numero_cotizacion}}</td>
-                                        <td> {{obj.fecha_solicitud}}</td>                               
+                                        <td> {{obj.fecha_solicitud }}</td>                               
                                         <td>{{obj.nombre_gerente}}</td>
                                         {% for category in  obj.categoria.all %}
                                         <td>  {{category.nombre}}  </td>
@@ -65,7 +65,7 @@
                                         
                                         </td>
                                         {% else %}
-                                        <td> <a href="{% url 'renovar' obj.id  %}">  Es necesario renovar  </a> </td>
+                                        <td> <a href="{% url 'renovar' obj.id  %}">vencido </a> </td>
                                         {% endif %}
 
                                         

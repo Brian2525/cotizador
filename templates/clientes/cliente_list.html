@@ -9,7 +9,7 @@
 <div id="content">
 
 <div class="container mt-5">
-    <h2 class="mb-4">Clientes</h2>
+    <h2 class="mb-4">Clientes - prospectos</h2>
 
 
 
@@ -22,6 +22,7 @@
             <tr>
                 <th scope="col">Nombre </th>
                 <th scope="col">Nombre de empresa</th>
+                <th scope="col">Estado pipeline</th>
                 <th scope="col">Direccion </th>
                 <th scope="col">Telefono</th>
                 <th scope="col">Email</th>
@@ -34,7 +35,8 @@
                 <tr>
                     <th scope="row">{{obj.nombre_cliente}} </th>
                     <td>{{obj.empresa_cliente}}</td>
-                    <td>{{obj.direccion_cliente}}  </td>
+                    <td>{{obj.estado_pipeline}}</td>
+                    <td>{{obj.direccion_cliente}} </td>
                     <td>{{obj.telefono_cliente}} </td>
                     <td>{{obj.email_cliente}} </td>
                     <td>

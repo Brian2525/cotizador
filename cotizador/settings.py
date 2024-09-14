@@ -10,6 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+
+
+#Me he quedado en el paso 7 de la instalacion de tailwwind. 
+# https://django-tailwind.readthedocs.io/en/latest/installation.html
+
+
+
 from pathlib import Path, os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +38,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    "unfold",  # before django.contrib.admin
+    "unfold.contrib.filters",  # optional, if special filters are needed
+    "unfold.contrib.forms",  # optional, if special form elements are needed
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +51,7 @@ INSTALLED_APPS = [
     'clientes',
     'bc',
     'dashboard',
+    
 ]
 
 MIDDLEWARE = [
@@ -61,6 +72,7 @@ SESSION_SAVE_EVERY_REQUEST = True
 
 
 ROOT_URLCONF = 'cotizador.urls'
+
 
 TEMPLATES = [
     {
@@ -111,6 +123,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -136,7 +152,7 @@ MEDIA_URL = '/media/'
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 
 # Default primary key field type

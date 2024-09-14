@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cliente
+from bc.models import Vendedores
 from .forms import ClienteForm
 from django.views.generic  import DetailView, ListView, TemplateView
 
@@ -25,12 +26,14 @@ def create_cliente(request):
         if request.method=='POST': 
             form=ClienteForm(data=request.POST)
             if form.is_valid():
-                form.instance.autor = request.user
                 form.save()
+                print(request.POST)
                 return redirect('clientes') 
         else:
             form=ClienteForm()
-        return render(request, 'clientes/create.html', {'form': form })
+            print("Hola222")
+            print(request.POST)
+        return render(request, 'clientes/create.html',{'form': form })
     else: 
         return redirect('/accounts/login/')
     

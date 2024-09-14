@@ -18,6 +18,7 @@ class VendedoresForm(forms.ModelForm):
                 'linkedin',
                 'sitio_web',
                 'video_corporativo',
+                
             
             ]
             

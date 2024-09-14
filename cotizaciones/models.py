@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from datetime import timedelta
+from datetime import timedelta, datetime
 from django.contrib.auth.models import User, Group, Permission
 
 
@@ -43,7 +43,7 @@ class Check(models.Model):
     tecnologia_fabricacion = models.CharField(max_length=100, null=True, blank=True)
     lugar_entrega = models.CharField(max_length=100, null=True, blank=True)
     producto_nuevo = models.BooleanField(default=False, null=True, blank=True)
-    fecha_solicitud = models.DateField(null=True, blank=True)
+    fecha_solicitud = models.DateTimeField(default=datetime.now())
     precio_objetivo = models.IntegerField(max_length=10, null=True, blank=True)
     tipo_producto = models.CharField(max_length=100, null=True, blank=True)
     comentarios_adicionales = models.TextField(max_length=300, blank=True, null=True) #por si existe algun requerimiento en especifico para el proyecto
@@ -52,10 +52,12 @@ class Check(models.Model):
     estado=models.CharField(max_length=10, choices=STATUS_CHOICES, default='pendiente', blank=True) #Este estado se refiere a la clasificacion de IDI. 
     motivo_rechazo =models.CharField( blank=True, max_length=100)
     autor=models.ForeignKey(User, on_delete=models.SET_NULL, null=True) 
-    fecha_expiracion=models.DateTimeField(default=timezone.now() + timedelta (minutes=10))
+    fecha_expiracion=models.DateTimeField(default=timezone.now() + timedelta (days=10))
     vigente=models.BooleanField(default=True, null=True) #Vigencia del check
     cliente=models.CharField(max_length=100, null=True,  blank=True)
     categoria=models.ManyToManyField(Categoria, related_name='relevancia_check', blank=True) # relevancia de la categoria
+    #Version del check - cada que haya un rechazo o debe agrearse la version 1.1 
+    
 
 
     def save(self, *args, **kwargs):

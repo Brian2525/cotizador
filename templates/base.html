@@ -33,7 +33,7 @@
                     <a href="{% url 'index'  %}">Home</a>
                 </li>
                 <li>
-                    <a href="{% url 'clientes'  %}">Clientes</a>
+                    <a href="{% url 'clientes'  %}">Prospectos</a>
                 </li>
                 <li>
                     <a href="{% url 'idi'  %}">Checks IDI </a>
@@ -42,7 +42,7 @@
                     <a href="{% url 'cotizaciones'  %}">Checks</a>
                 </li>
                 <li>
-                    <a href="{% url 'vendedores'  %}">Vendedores</a>
+                    <a href="{% url 'vendedores'  %}">Gerentes</a>
                 </li>
                 <!--<li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
@@ -100,6 +100,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
     {% block extra_js %}
+
+    
     <!-- Lugar para JS adicional en otras plantillas -->
     {% endblock %}
 </body>

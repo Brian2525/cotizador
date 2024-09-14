@@ -22,8 +22,9 @@ class CheckForm(forms.ModelForm):
         model = Check
         fields=[
             'nombre_gerente',
+            'cliente',
             'numero_cotizacion',
-            'fecha_solicitud',
+            
             'nombre_proyecto',
             'estado',
             'volumen_estimado',
@@ -40,7 +41,6 @@ class CheckForm(forms.ModelForm):
 
         widgets={
             'numero_cotizacion': forms.NumberInput(attrs={'class': 'mb-3 form-control', 'placeholder': 'Numero de cotizacion'}),
-            'fecha_solicitud': forms.DateInput(attrs={'class': 'form-control','type':'date',  'placeholder': 'Enter title'}),
             'nombre_proyecto' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter title'}),
             'tecnologia_fabricacion': forms.Select(choices=CATEGORY_CHOICES,attrs={'class': 'form-select' } ),
             'estado': forms.Select(choices=STATUS_CHOICES,attrs={'class': 'form-select' } ),
