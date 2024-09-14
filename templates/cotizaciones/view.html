@@ -9,7 +9,7 @@
 
 
 
-  <div class="col-md-6">
+  <div class="col-md-8">
     <section class="py-3 py-md-5">
       <div class="container">
         <div class="row justify-content-center">
@@ -128,20 +128,25 @@
 
   </div>
 
-    <!-- Banner de comentarios a la derecha -->
-  <div class="col-md-6">
-        <div class="card">
-          <div class="card-body">
-            El numero de pedido está mal.
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            No se ha revisado con el cliente la informacion
-          </div>
-        </div>
-  </div>
+  {% if comentarios%}
 
+  <p>si existo</p>
+ {{numero_comentarios}}
+  <p></p>
+
+  {%endif%}
+
+    
+  <div class="col-md-4">
+  {% for obj in comentarios %}
+        <div class="card">
+          <div class="card-body">
+          {{obj.id}}
+          {{obj.comentario}}
+          </div>
+        </div>
+  {% endfor %}
+  </div>
 
 
 
@@ -150,17 +155,21 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Llenar campo</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Motivo de rechazo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <label for="modalInput">Motivo de rechazo:</label>
-        <input type="text" id="modalInput" class="form-control" name="modalInput">
+       <div class="modal-body">
+      <form method="POST" id="FormComentarios">
+      {% csrf_token %}
+      {{form2.as_p}}
+      
+        
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" id="fillFormBtn">Enviar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary action-button" >Crear</button>
       </div>
+       </form>
     </div>
   </div>
 </div>
@@ -179,6 +188,14 @@ document.getElementById('fillFormBtn').addEventListener('click', function() {
     const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
     modal.hide();
 });
+</script>
+
+<script>
+  document.getElementById('FormComentarios').addEventListener('submit', function() {
+    setTimeout(function() {
+      document.getElementById('FormComentarios').reset();
+    }, 1);  // Ajusta el tiempo si es necesario
+  });
 </script>
 
 

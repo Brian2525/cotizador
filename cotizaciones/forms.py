@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Check, Status
+from .models import Check, Status, Comentarios
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
@@ -49,3 +49,11 @@ class CheckForm(forms.ModelForm):
 
          # Etiqueta opcional para la opción vacía)
 
+class ComentariosForm(forms.ModelForm):
+    class Meta:
+        model=Comentarios
+        fields=[
+
+            
+            'comentario',
+        ]

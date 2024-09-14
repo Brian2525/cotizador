@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic  import DetailView, ListView, TemplateView
 from django.views import View
-from .models import Check, Categoria
+from .models import Check, Categoria, Comentarios
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import LoginForm, CheckForm
+from .forms import LoginForm, CheckForm, ComentariosForm
 from django.template.loader import get_template
 from django.templatetags.static import static
 from django.http import HttpResponse, request, HttpResponseRedirect
@@ -42,6 +42,12 @@ from django.contrib.staticfiles import finders
 class Check_control(LoginRequiredMixin): 
     @login_required
     def create_check(request):
+        form=CheckForm(),
+        form2=ComentariosForm()
+        context ={
+                  'form':form,
+                  'form2': form2
+        }
         if request.user.is_authenticated:
             if request.method=='POST': 
                 form=CheckForm(data=request.POST)
@@ -50,17 +56,34 @@ class Check_control(LoginRequiredMixin):
                     form.save()
                     return redirect('cotizaciones') 
             else:
-                form=CheckForm()
-            return render(request, 'cotizaciones/create.html', {'form': form })
+                 form
+                 form2
+            return render(request, 'cotizaciones/create.html', context)
         else: 
             return redirect('/accounts/login/')
     
-   
+
+
     def read_check(request, id):
-        check=get_object_or_404(Check, id=id,  autor_id=request.user )
-        return render(request, 'cotizaciones/view.html', {'check': check } )
+        check=get_object_or_404(Check, id=id,  autor_id=request.user)
+        comentarios=Comentarios.objects.filter(check_asociado=check.id)
+        numero_comentarios=len(comentarios)
+        form2=ComentariosForm(data=request.POST)
+        if form2.is_valid():
+             form2.instance.autor_comentario = request.user
+             form2.instance.check_asociado = check
+             form2.save()
+        context ={
+                  'check':check,
+                  'form2': form2,
+                  'comentarios': comentarios,
+                  'numero_comentarios':numero_comentarios,
+        }
+
+        return render(request, 'cotizaciones/view.html', context)
     
     
+
     def update_check(request, id):
         check=get_object_or_404(Check, id=id, autor_id=request.user)
         if request.method=='POST': 

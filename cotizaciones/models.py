@@ -18,6 +18,7 @@ class Status(models.Model):
 
 
 
+
 class Categoria(models.Model):
     nombre=models.CharField(max_length=100, null=False, unique=True, verbose_name='Nombre')
 
@@ -71,7 +72,7 @@ class Check(models.Model):
             self.save()
     
     def renovar_expiracion(self):
-        self.fecha_expiracion= timezone.now() + timedelta(minutes=3)
+        self.fecha_expiracion= timezone.now() + timedelta(days=10)
         self.vigente=True
         self.save()
 
@@ -80,10 +81,23 @@ class Check(models.Model):
       #  self.save()
 
 
-    
-
     def __str__(self):
         return self.nombre_proyecto  # Devuelve el nombre del producto como representación del objetouser=User.objects.create_user('username', 'mail', 'password')
+
+
+
+class Comentarios(models.Model):
+    check_asociado=models.ForeignKey(Check, on_delete=models.CASCADE,related_name='comentarios', blank=True, null=True)
+    autor_comentario=models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True )
+    comentario=models.TextField(max_length=100, null=True)
+    fecha_creacion=models.DateTimeField(default=datetime.now())
+    resuelto=models.BooleanField(default=False, blank=True, null=True )
+
+    
+    def __str__(self):
+        return self.comentario 
+
+
 
 
 
