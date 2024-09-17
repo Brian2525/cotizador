@@ -8,6 +8,8 @@ def index(request):
     total_checks=Check.objects.count()
     total_clientes=Cliente.objects.count()
     total_vendedores=Vendedores.objects.count()
+    
+
 
     context ={
         'total_checks':total_checks,
@@ -17,4 +19,6 @@ def index(request):
 
 
     return render(request, 'dashboard/index.html', context)
+
+
 

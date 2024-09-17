@@ -128,23 +128,21 @@
 
   </div>
 
-  {% if comentarios%}
-
-  <p>si existo</p>
- {{numero_comentarios}}
-  <p></p>
-
-  {%endif%}
-
     
   <div class="col-md-4">
   {% for obj in comentarios %}
-        <div class="card">
-          <div class="card-body">
-          {{obj.id}}
-          {{obj.comentario}}
+          <div class="card">
+            <div class="card-body">
+            {{obj.id}}
+            {{obj.comentario}}
+            {{obj.autor_comentario}}
+            {%if obj.resuelto %}
+            <p> Sin resolver  </p>
+            {%else%}
+            <p>   </p>
+            {% endif %}
+            </div>
           </div>
-        </div>
   {% endfor %}
   </div>
 
@@ -161,7 +159,7 @@
        <div class="modal-body">
       <form method="POST" id="FormComentarios">
       {% csrf_token %}
-      {{form2.as_p}}
+      {{form2.comentario}}
       
         
       </div>
@@ -178,12 +176,6 @@
 
 <script>
 document.getElementById('fillFormBtn').addEventListener('click', function() {
-    // Obtén el valor del input dentro del modal
-    const modalValue = document.getElementById('modalInput').value;
-
-    // Encuentra el campo de input en el formulario de Django y establece su valor
-    document.getElementById('id_name').value = modalValue;
-
     // Cierra el modal utilizando Bootstrap
     const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
     modal.hide();
@@ -194,7 +186,7 @@ document.getElementById('fillFormBtn').addEventListener('click', function() {
   document.getElementById('FormComentarios').addEventListener('submit', function() {
     setTimeout(function() {
       document.getElementById('FormComentarios').reset();
-    }, 1);  // Ajusta el tiempo si es necesario
+    }, 500);  // Ajusta el tiempo si es necesario
   });
 </script>
 

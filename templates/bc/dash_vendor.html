@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div id="content">
+
+ <div class="container mt-5">
+        <h2 class="text-center mb-4">Bienvendo Gerente : "Nombre"</h2>
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Numero de checks</th>
+                     
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+               
+
+                    <td>{{vendedor.nombre}}</td>
+                    
+                    
+                    
+                </tr>
+                
+                <!-- Más filas de clientes -->
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+
+
+{% endblock %}

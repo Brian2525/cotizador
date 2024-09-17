@@ -42,23 +42,17 @@ from django.contrib.staticfiles import finders
 class Check_control(LoginRequiredMixin): 
     @login_required
     def create_check(request):
-        form=CheckForm(),
-        form2=ComentariosForm()
-        context ={
-                  'form':form,
-                  'form2': form2
-        }
+        form=CheckForm()
         if request.user.is_authenticated:
             if request.method=='POST': 
                 form=CheckForm(data=request.POST)
                 if form.is_valid():
                     form.instance.autor = request.user
                     form.save()
-                    return redirect('cotizaciones') 
+                return redirect('cotizaciones') 
             else:
-                 form
-                 form2
-            return render(request, 'cotizaciones/create.html', context)
+                form=CheckForm()
+            return render(request, 'cotizaciones/create.html', {'form': form })
         else: 
             return redirect('/accounts/login/')
     
@@ -67,7 +61,6 @@ class Check_control(LoginRequiredMixin):
     def read_check(request, id):
         check=get_object_or_404(Check, id=id,  autor_id=request.user)
         comentarios=Comentarios.objects.filter(check_asociado=check.id)
-        numero_comentarios=len(comentarios)
         form2=ComentariosForm(data=request.POST)
         if form2.is_valid():
              form2.instance.autor_comentario = request.user
@@ -77,7 +70,6 @@ class Check_control(LoginRequiredMixin):
                   'check':check,
                   'form2': form2,
                   'comentarios': comentarios,
-                  'numero_comentarios':numero_comentarios,
         }
 
         return render(request, 'cotizaciones/view.html', context)
@@ -86,16 +78,32 @@ class Check_control(LoginRequiredMixin):
 
     def update_check(request, id):
         check=get_object_or_404(Check, id=id, autor_id=request.user)
+        comentarios=Comentarios.objects.filter(check_asociado=check.id)
+        form=CheckForm(instance=check)
+        form2=ComentariosForm()
+        context ={
+                  'check':check,
+                  'comentarios': comentarios,
+                  'form':form,
+                  'form2':form2, 
+        }
         if request.method=='POST': 
             form=CheckForm(data=request.POST, instance=check)
+            form2=ComentariosForm(data=request.POST)
+            if form2.is_valid():
+                form2.instance.autor_comentario = request.user
+                form2.instance.check_asociado = check
+                form2.save()
             if form.is_valid():
                 form.instance.autor = request.user
                 form.save()
-            return redirect('cotizaciones') #Después debe redirigir a la lista de checks creados 
+
+             #Después debe redirigir a la lista de checks creados 
         else:
             print('No es valido')
-        form=CheckForm(instance=check) 
-        return render(request, 'cotizaciones/edit.html', {'form': form })
+            form=CheckForm(instance=check) 
+        
+        return render(request, 'cotizaciones/edit.html', context)
 
 
 

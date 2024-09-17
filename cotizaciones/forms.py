@@ -33,7 +33,6 @@ class CheckForm(forms.ModelForm):
             'tipo_producto',
             'tecnologia_fabricacion',
             'nombre_empresa',
-             'motivo_rechazo', 
                 'lugar_entrega',
                 'precio_objetivo',  'comentarios_adicionales'
                 , 'frecuencia_compra', 'categoria' ]
@@ -54,6 +53,6 @@ class ComentariosForm(forms.ModelForm):
         model=Comentarios
         fields=[
 
-            
+            'resuelto',
             'comentario',
         ]

@@ -1,8 +1,11 @@
+from typing import Any
 from django.shortcuts import render, redirect, get_object_or_404 
 from .forms import VendedoresForm, Vendedores
 from .models import Vendedores
+from cotizaciones.models import Check
 from .forms import VendedoresForm
 from clientes.forms import ClienteForm
+from django.db.models import Sum
 from django.views.generic  import DetailView, ListView, TemplateView
 
 
@@ -13,11 +16,11 @@ class listar_vendedores(ListView):
     model=Vendedores
 
 
+
 class vendedor(DetailView):
     model=Vendedores
-
-
-
+    template_name='vendedores_detail.html'
+  
 
 # Create  vendedor
 def Cvendedor(request):
@@ -45,11 +48,19 @@ def update_vendedor(request, id):
     return render(request, 'bc/edit.html', {'form': form })
 
 
-
-
-
-
-
+def dashbord_vendedor(request,id):
+   vendedor=get_object_or_404(Vendedores, id=id)
+   total_checks=Check.objects.filter(autor=vendedor.id).count()
+   #checks= get_object_or_404(autor=vendedor)# quiero sber cuantos checks ha generado
+   #numero_checks=len(checks)
+   #total_checks= checks.aaggregate(Sum('precio_objetivo'))['monto_sum']
+   context = {
+        'vendedor': vendedor,
+        #'checks': checks,
+        #'numero_checks':numero_checks,
+        #'total_cotizaciones': total_checks,
+    }
+   return render(request, 'bc/dash_vendor.html', context)
 
 
 #vista de business Card con formulario de contacto    
