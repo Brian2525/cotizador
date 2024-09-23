@@ -30,20 +30,15 @@
                 <p>Creacion de checks</p>
                 
                 <li>
-                    <a href="{% url 'index'  %}">Home</a>
+                    <a href="{% url 'cotizaciones'  %}">Home</a>
                 </li>
                 <li>
-                    <a href="{% url 'clientes'  %}">Prospectos</a>
+                    <a href="{% url 'idi'  %}">IDI</a>
                 </li>
-                <li>
-                    <a href="{% url 'idi'  %}">Checks IDI </a>
-                </li>
-                 <li>
-                    <a href="{% url 'cotizaciones'  %}">Checks</a>
-                </li>
-                <li>
-                    <a href="{% url 'vendedores'  %}">Gerentes</a>
-                </li>
+               
+               
+                
+               
                 <!--<li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
@@ -67,7 +62,6 @@
             {% csrf_token %}
             <button  class="btn btn-primary" type="submit">logout</button>
          
-            <li class="article"><a href="{% url 'login'%}?next={{request.path}}">Iniciar sesión</a></li>
                 </form>
             </ul>
             

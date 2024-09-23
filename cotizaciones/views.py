@@ -37,7 +37,7 @@ from django.template.loader import get_template, render_to_string
 from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
 
-#CRUD 
+#CRUD Usuario Gerente
 
 class Check_control(LoginRequiredMixin): 
     @login_required
@@ -108,6 +108,7 @@ class Check_control(LoginRequiredMixin):
 
 
 
+
     @login_required
     def delete(request, id):
         check=get_object_or_404(Check, id=id, autor_id=request.user)
@@ -116,16 +117,87 @@ class Check_control(LoginRequiredMixin):
 
 #Vistas
 
-class list_check(LoginRequiredMixin,ListView):
-    model=Check
+
+#CRUD Usuario IDI 
+
+class Check_idi(LoginRequiredMixin): 
+
+    def read_check(request, id):
+        check=get_object_or_404(Check, id=id)
+        comentarios=Comentarios.objects.filter(check_asociado=check.id)
+        form2=ComentariosForm(data=request.POST)
+        if form2.is_valid():
+             form2.instance.autor_comentario = request.user
+             form2.instance.check_asociado = check
+             form2.save()
+        context ={
+                  'check':check,
+                  'form2': form2,
+                  'comentarios': comentarios,
+        }
+
+        return render(request, 'cotizaciones/view.html', context)
+    
+    
+
+    def update_check(request, id):
+        check=get_object_or_404(Check, id=id)
+        comentarios=Comentarios.objects.filter(check_asociado=check.id)
+        form=CheckForm(instance=check)
+        form2=ComentariosForm()
+        context ={
+                  'check':check,
+                  'comentarios': comentarios,
+                  'form':form,
+                  'form2':form2, 
+        }
+        if request.method=='POST': 
+            form=CheckForm(data=request.POST, instance=check)
+            form2=ComentariosForm(data=request.POST)
+            if form2.is_valid():
+                form2.instance.autor_comentario = request.user
+                form2.instance.check_asociado = check
+                form2.save()
+            if form.is_valid():
+                form.instance.autor = request.user
+                form.save()
+
+             #Después debe redirigir a la lista de checks creados 
+        else:
+            print('No es valido')
+            form=CheckForm(instance=check) 
+        
+        return render(request, 'cotizaciones/edit.html', context)
+    
+    def list_idi(request): 
+        if request.user.is_authenticated:
+            check=Check.objects.all()
+            #related_check=Check.objects.filter(autor_id=request.user)
+            context ={
+                    'check':check,
+                    #'related_check': related_check,
+                    
+            }
+            for obj in check:
+                obj.verificar_expiracion()
+                obj.save
+            return render (request, 'cotizaciones/list_idi.html', {'check': check})
+        else: 
+            return redirect('/accounts/login/')
 
 
 
 
+#Para filtrar los checks por usuario
 def list(request): 
     if request.user.is_authenticated:
-    #check=Check.objects.all()
+        #check=Check.objects.all()
         check=Check.objects.filter(autor_id=request.user)
+        context ={
+                  'check':check,
+                  #'related_check': related_check,
+                   
+        }
         for obj in check:
              obj.verificar_expiracion()
              obj.save

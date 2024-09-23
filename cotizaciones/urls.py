@@ -4,8 +4,11 @@ from django.conf.urls import handler404
 
 
 urlpatterns=[
-    path('cotizaciones',views.list, name='cotizaciones'),
-    path('idi',views.list_check.as_view(), name='idi'),
+    
+    path('',views.list, name='cotizaciones'),
+    path('idi/', views.Check_idi.list_idi , name='idi'),
+    path('idi/ver/<int:id>/', views.Check_idi.read_check, name='verIdi'),
+    path('idi/editar/<int:id>', views.Check_control.update_check, name='editarIdi'),
     path('create', views.Check_control.create_check , name='create'),
     path('editar/<int:id>', views.Check_control.update_check, name='editar'),
     path('ver/<int:id>/', views.Check_control.read_check, name='ver'),
