@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.views.generic  import DetailView, ListView, TemplateView
 from django.views import View
 from .models import Check, Categoria, Comentarios
 from django.contrib.auth import authenticate, login
@@ -17,13 +16,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import functools
 
 from django.conf import settings
-from django.views.generic import DetailView
-from django.utils import timezone
-from django_weasyprint import WeasyTemplateResponseMixin
-from django_weasyprint.views import WeasyTemplateResponse
-from django_weasyprint.utils import django_url_fetcher
-from weasyprint import HTML, CSS
-from weasyprint.text.fonts import FontConfiguration
+
+
 from cotizador.wsgi import *
 from cotizador import settings
 
