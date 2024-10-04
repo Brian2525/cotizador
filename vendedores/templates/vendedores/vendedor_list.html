@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Lista de Vendedores</h1>
+    <a href="{% url 'vendedor_create' %}" class="btn btn-primary mb-3">Agregar Vendedor</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Sitio Web</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vendedor in vendedores %}
+            <tr>
+                <td>{{ vendedor.nombre }}</td>
+                <td>{{ vendedor.correo }}</td>
+                <td>{{ vendedor.telefono }}</td>
+                <td><a href="{{ vendedor.sitio_web }}" target="_blank">{{ vendedor.sitio_web }}</a></td>
+                <td>
+                    <a href="{% url 'vendedor_update' vendedor.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'vendedor_delete' vendedor.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

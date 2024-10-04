@@ -1,0 +1,44 @@
+<!-- templates/navbar.html -->
+
+<nav id="sidebar" class="navbar navbar-expand-lg navbar-light">
+        <ul class="navbar-nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hola, {{ user.username }}</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'cotizaciones' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'idi' %}">IDI</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'empresa_list' %}">Empresas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'cliente_list' %}">Clientes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'vendedor_list' %}">Vendedores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'producto_list' %}">Productos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'deal_list' %}">Negocios</a>
+            </li>
+
+
+             
+            <ul class="list-unstyled CTAs">
+                <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button  class="btn btn-primary" type="submit">logout</button>
+         
+                </form>
+            </ul>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+            </li>
+        </ul>
+    </nav>

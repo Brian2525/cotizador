@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Lista de Productos</h2>
+    <a href="{% url 'producto_create' %}" class="btn btn-primary mb-3">Crear Nuevo Producto</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>SKU</th>
+                <th>Precio</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.sku }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.get_tipo_display }}</td>
+                <td>
+                    <a href="{% url 'producto_update' producto.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{% url 'producto_delete' producto.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
