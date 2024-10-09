@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Página Personal</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .profile-container {
+            text-align: center;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <img src="https://via.placeholder.com/150" alt="Foto de perfil" class="profile-pic">
+        <div class="card" style="max-width: 400px; margin: auto;">
+            <div class="card-body">
+                <h5 class="card-title">Nombre: {{vendedor.nombre}}</h5>
+                <p class="card-text">Correo: <a href="{{vendedor.correo}}">{{vendedor.correo}}</a></p>
+                <p class="card-text">Teléfono:{{vendedor.telefono}}</p>
+                <p class="card-text">Sitio web: <a href="{{vendedor.sitio_web}}" target="_blank">{{vendedor.sitio_web}}</a></p>
+                <p class="card-text">Dirección: {{vendedor.direccion}}</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

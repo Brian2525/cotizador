@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<div id="content" class="container">
+
 <h2>Lista de Empresas</h2>
 <a href="{% url 'empresa_create' %}" class="btn btn-primary mb-3">Crear Empresa</a>
 <table class="table table-striped">
@@ -26,4 +29,7 @@
         {% endfor %}
     </tbody>
 </table>
+
+</div>
+
 {% endblock %}

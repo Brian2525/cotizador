@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="{% static 'cotizaciones/css/create.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
 {% endblock %}
+
+
+
 {% block content %}
-
-<body>
-
 
 <!-- MultiStep Form -->
 <div class="container-fluid" id="grad1">
@@ -21,9 +21,7 @@
                 <h2><strong>Create check</strong></h2>
                 <p>Llena todos los campos y después da en siguiente</p>
                 <div class="row">
-                    <div class="col-md-12 mx-0">
-                        
-                        
+                    <div class="col-md-12 mx-0">  
                         <form method="POST" id="msform">
                             {% csrf_token %}
                             <!-- progressbar -->
@@ -85,7 +83,6 @@
                                 <input type="button" name="previous" class="previous action-button-previous" value="Anterior"/>
                                 <input type="button" name="next" class="next action-button" value="Siguiente"/>
                             </fieldset>
-
                            
                             <fieldset>
                                 <div class="form-card">

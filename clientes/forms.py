@@ -1,5 +1,6 @@
 from django import forms
-from .models import Empresa, Cliente
+from .models import  Cliente
+from empresas.models import Empresa
 
 
 class EmpresaForm(forms.ModelForm):

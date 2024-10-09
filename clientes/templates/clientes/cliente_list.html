@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
+
+
+
 {% block content %}
+<div id="content" class="container">
+
 <h2>Lista de Clientes</h2>
 <a href="{% url 'cliente_create' %}" class="btn btn-primary mb-3">Crear Cliente</a>
 <table class="table table-striped">
@@ -28,4 +33,7 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
+
+
 {% endblock %}

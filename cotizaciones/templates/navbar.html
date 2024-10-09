@@ -1,44 +1,63 @@
 <!-- templates/navbar.html -->
-
-<nav id="sidebar" class="navbar navbar-expand-lg navbar-light">
-        <ul class="navbar-nav flex-column">
+<style>
+        .sidebar {
+            height: 100vh;
+            background-color: #abb9e8;
+            color: white;
+            position: fixed;
+            width: 200px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #8e9ddf;
+        }
+        .sidebar .sidebar-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar .sidebar-header img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .sidebar .sidebar-header .fa-user-circle {
+            margin-left: auto;
+            cursor: pointer;
+        }
+    </style>
+ 
+ 
+ 
+ <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="/static/logo.png" alt="Logo">
+            <span>Mi Proyecto</span>
+            <i class="fa fa-user-circle" title="Editar Perfil"></i>
+        </div>
+        <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="#">Hola, {{ user.username }}</a>
+                <a class="nav-link" href="{% url 'deal_list' %}"><i class="fa fa-handshake"></i> Deals</a>
             </li>
-            
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'cotizaciones' %}">Home</a>
+                <a class="nav-link" href="{% url 'empresa_list' %}"><i class="fa fa-building"></i> Empresas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'idi' %}">IDI</a>
+                <a class="nav-link" href="{% url 'cliente_list' %}"><i class="fa fa-users"></i> Clientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'empresa_list' %}">Empresas</a>
+                <a class="nav-link" href="{% url 'cotizaciones' %}"><i class="fa fa-file-invoice"></i> Cotizaciones</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'cliente_list' %}">Clientes</a>
+                <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in-alt"></i> Inicio de Sesión</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'vendedor_list' %}">Vendedores</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'producto_list' %}">Productos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'deal_list' %}">Negocios</a>
-            </li>
-
-
-             
-            <ul class="list-unstyled CTAs">
-                <form method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button  class="btn btn-primary" type="submit">logout</button>
-         
-                </form>
-            </ul>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+                <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i> Cerrar Sesión</a>
             </li>
         </ul>
-    </nav>
+    </div>

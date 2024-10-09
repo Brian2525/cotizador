@@ -8,6 +8,16 @@ def vendedor_list(request):
     vendedores = Vendedor.objects.all()
     return render(request, 'vendedores/vendedor_list.html', {'vendedores': vendedores})
 
+
+
+
+def vendedor_bc(request, id):
+    vendedor = get_object_or_404(Vendedor, pk=id)
+    return render(request, 'vendedores/bc.html', {'vendedor': vendedor})
+
+
+
+
 # Crear un nuevo vendedor
 def vendedor_create(request):
     if request.method == 'POST':
