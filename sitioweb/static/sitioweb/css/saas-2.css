@@ -54,7 +54,7 @@
 }
 
 .gradient-text {
-    font-family: var(--cnvs-primary-font);
+    font-family: var(--cnvs-primar-font);
 	padding: 0 5px;
 	font-size: 120%;
 }

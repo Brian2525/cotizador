@@ -9,6 +9,9 @@ Tiene un costo de $590.00 la tarjeta virtual y, $590.00 la tarjeta fisica con NF
 Crear la app para el blog(eventos empresariales para comunidad y noticias de eventos de emprededores)
 
 
+
+
+
 Crear la pagina para el contacto (El formulario de contacto con la empresa, es decir quien quiera contactarnos)
 
 
