@@ -1,0 +1,51 @@
+Si el sistema se hace para la página de realidad aumentada o para illutio 
+O si se hace para connectar. 
+
+
+Se ha creado la app para el sitio web (crear la página principal - Debe mostrar la lista de precios y los precios por tarjeta de presentacion. 
+Tiene un costo de $590.00 la tarjeta virtual y, $590.00 la tarjeta fisica con NFC $890 un millar de tarjetas de presentacion con diseño predeterminado)
+
+
+Crear la app para el blog(eventos empresariales para comunidad y noticias de eventos de emprededores)
+
+
+Crear la pagina para el contacto (El formulario de contacto con la empresa, es decir quien quiera contactarnos)
+
+
+Directorio empresarial - Es importante poder mencionar que pueden marcar si desean aparecer en el directorio de negocios ya que esto les puede dar exposicion y además backlinks
+Ademas de que a nosotros nos genera relevancia para que nos encuentren.
+
+
+Crear el sitio de registro 
+
+
+
+
+
+Actualmente se pueden hacer distintas tarjetas de presentación. 
+
+Quisiera que la página web pudiera asociarse
+
+
+
+
+Tarjetas de presentación - 
+
+En la landing page principal se requiere que 
+
+
+
+
+Los diferenciadores - El plan inicial te permite tener 
+Una tarjeta virtual y una tarjeta fisica con NFC 
+Hacer una tarjeta fisica 
+
+Opcional 
+Implementar realidad aumentada con un video predeterminado. 
+
+
+
+Tabla de precios 
+
+
+

@@ -4,12 +4,15 @@ from django.views import View
 from .models import Check, Categoria, Comentarios
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import LoginForm, CheckForm, ComentariosForm
+from .forms import LoginForm, CheckForm, ComentariosForm, CustomUserCreationForm
 from django.template.loader import get_template
 from django.templatetags.static import static
 from django.http import HttpResponse, request, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.contrib import messages
+
 
 
 #weasy HTML to PDF 
@@ -239,6 +242,20 @@ def secure(request):
     return render(request,"secure.html",{})
 
 
+def register(request):
+    data= {
+            'form' : CustomUserCreationForm()     
+        }
+    if request.method == 'POST':    
+        user_creation_form=CustomUserCreationForm(data=request.POST)
+        if user_creation_form.is_valid(): 
+            user_creation_form.save()
+            user=authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
+            login(request, user)
+            return redirect ('cotizaciones')
+    return render(request, 'registration/register.html', data)
+        
+    
 
 
 
