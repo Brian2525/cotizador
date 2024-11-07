@@ -1,65 +1,41 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Cliente
-from bc.models import Vendedores
-from .forms import ClienteForm
-from django.views.generic  import DetailView, ListView, TemplateView
+from django.shortcuts import render, get_object_or_404, redirect
+from empresas.models import Empresa
+from empresas.forms import EmpresaForm
+from .forms import  ClienteForm
+from clientes.models import Cliente
 
+# Cliente CRUD
+def cliente_list(request):
+    clientes = Cliente.objects.all()
+    return render(request, 'clientes/cliente_list.html', {'clientes': clientes})
+
+def cliente_create(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cliente_list')
+    else:
+        form = ClienteForm()
+    return render(request, 'clientes/cliente_form.html', {'form': form})
+
+def cliente_update(request, pk):
+    cliente = get_object_or_404(Cliente, pk=pk)
+    if request.method == 'POST':
+        form = ClienteForm(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            return redirect('cliente_list')
+    else:
+        form = ClienteForm(instance=cliente)
+    return render(request, 'clientes/cliente_form.html', {'form': form})
+
+def cliente_delete(request, pk):
+    cliente = get_object_or_404(Cliente, pk=pk)
+    if request.method == 'POST':
+        cliente.delete()
+        return redirect('cliente_list')
+    return render(request, 'clientes/cliente_confirm_delete.html', {'cliente': cliente})
 
 
 # Create your views here.
-
-
-class list_cliente(ListView):
-    model=Cliente
-
-
-
-class detail_cliente(DetailView):
-    model=Cliente
-
-
-
-
-
-def create_cliente(request):
-    if request.user.is_authenticated:
-        if request.method=='POST': 
-            form=ClienteForm(data=request.POST)
-            if form.is_valid():
-                form.save()
-                print(request.POST)
-                return redirect('clientes') 
-        else:
-            form=ClienteForm()
-            print("Hola222")
-            print(request.POST)
-        return render(request, 'clientes/create.html',{'form': form })
-    else: 
-        return redirect('/accounts/login/')
-    
-   
-def read_check(request, id):
-    check=get_object_or_404(Cliente, id=id,  autor_id=request.user )
-    return render(request, 'clientes/view.html', {'check': check } )
-    
-    
-def update_check(request, id):
-    check=get_object_or_404(Cliente, id=id)
-    if request.method=='POST': 
-        form=ClienteForm(data=request.POST, instance=check)
-        if form.is_valid():
-
-            form.save()
-        return redirect('clientes') #Después debe redirigir a la lista de checks creados 
-    else:
-        print('No es valido')
-    form=ClienteForm(instance=check) 
-    return render(request, 'clientes/edit.html', {'form': form })
-    
-    
-def delete(request, id):
-    check=get_object_or_404(Cliente, id=id)
-    check.delete()
-    return redirect('clientes')
-
-   

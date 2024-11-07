@@ -1,29 +1,26 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.views.generic  import DetailView, ListView, TemplateView
 from django.views import View
 from .models import Check, Categoria, Comentarios
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import LoginForm, CheckForm, ComentariosForm
+from .forms import LoginForm, CheckForm, ComentariosForm, CustomUserCreationForm
 from django.template.loader import get_template
 from django.templatetags.static import static
 from django.http import HttpResponse, request, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.contrib import messages
+
+
 
 #weasy HTML to PDF 
 import functools
 
 from django.conf import settings
-from django.views.generic import DetailView
-from django.utils import timezone
-from django_weasyprint import WeasyTemplateResponseMixin
-from django_weasyprint.views import WeasyTemplateResponse
-from django_weasyprint.utils import django_url_fetcher
-from weasyprint import HTML, CSS
-from weasyprint.text.fonts import FontConfiguration
+
+
 from cotizador.wsgi import *
 from cotizador import settings
 
@@ -37,7 +34,7 @@ from django.template.loader import get_template, render_to_string
 from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
 
-#CRUD 
+#CRUD Usuario Gerente
 
 class Check_control(LoginRequiredMixin): 
     @login_required
@@ -108,6 +105,7 @@ class Check_control(LoginRequiredMixin):
 
 
 
+
     @login_required
     def delete(request, id):
         check=get_object_or_404(Check, id=id, autor_id=request.user)
@@ -116,16 +114,87 @@ class Check_control(LoginRequiredMixin):
 
 #Vistas
 
-class list_check(LoginRequiredMixin,ListView):
-    model=Check
+
+#CRUD Usuario IDI 
+
+class Check_idi(LoginRequiredMixin): 
+
+    def read_check(request, id):
+        check=get_object_or_404(Check, id=id)
+        comentarios=Comentarios.objects.filter(check_asociado=check.id)
+        form2=ComentariosForm(data=request.POST)
+        if form2.is_valid():
+             form2.instance.autor_comentario = request.user
+             form2.instance.check_asociado = check
+             form2.save()
+        context ={
+                  'check':check,
+                  'form2': form2,
+                  'comentarios': comentarios,
+        }
+
+        return render(request, 'cotizaciones/view.html', context)
+    
+    
+
+    def update_check(request, id):
+        check=get_object_or_404(Check, id=id)
+        comentarios=Comentarios.objects.filter(check_asociado=check.id)
+        form=CheckForm(instance=check)
+        form2=ComentariosForm()
+        context ={
+                  'check':check,
+                  'comentarios': comentarios,
+                  'form':form,
+                  'form2':form2, 
+        }
+        if request.method=='POST': 
+            form=CheckForm(data=request.POST, instance=check)
+            form2=ComentariosForm(data=request.POST)
+            if form2.is_valid():
+                form2.instance.autor_comentario = request.user
+                form2.instance.check_asociado = check
+                form2.save()
+            if form.is_valid():
+                form.instance.autor = request.user
+                form.save()
+
+             #Después debe redirigir a la lista de checks creados 
+        else:
+            print('No es valido')
+            form=CheckForm(instance=check) 
+        
+        return render(request, 'cotizaciones/edit.html', context)
+    
+    def list_idi(request): 
+        if request.user.is_authenticated:
+            check=Check.objects.all()
+            #related_check=Check.objects.filter(autor_id=request.user)
+            context ={
+                    'check':check,
+                    #'related_check': related_check,
+                    
+            }
+            for obj in check:
+                obj.verificar_expiracion()
+                obj.save
+            return render (request, 'cotizaciones/list_idi.html', {'check': check})
+        else: 
+            return redirect('/accounts/login/')
 
 
 
 
+#Para filtrar los checks por usuario
 def list(request): 
     if request.user.is_authenticated:
-    #check=Check.objects.all()
+        #check=Check.objects.all()
         check=Check.objects.filter(autor_id=request.user)
+        context ={
+                  'check':check,
+                  #'related_check': related_check,
+                   
+        }
         for obj in check:
              obj.verificar_expiracion()
              obj.save
@@ -173,6 +242,20 @@ def secure(request):
     return render(request,"secure.html",{})
 
 
+def register(request):
+    data= {
+            'form' : CustomUserCreationForm()     
+        }
+    if request.method == 'POST':    
+        user_creation_form=CustomUserCreationForm(data=request.POST)
+        if user_creation_form.is_valid(): 
+            user_creation_form.save()
+            user=authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
+            login(request, user)
+            return redirect ('cotizaciones')
+    return render(request, 'registration/register.html', data)
+        
+    
 
 
 

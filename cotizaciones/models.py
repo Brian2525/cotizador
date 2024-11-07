@@ -32,30 +32,16 @@ class Categoria(models.Model):
         ordering=['id']
 
 class Check(models.Model):
-    STATUS_CHOICES = [('pendiente', 'pendiente'),('aprobado', 'aprobado'),('rechazado', 'rechazado')]
-    PRODUCT_CLASIFICATIOM= [('si', 'si'),('no', 'no')]
-
-    nombre_gerente = models.CharField(max_length=100, null=True)
-    numero_cotizacion = models.IntegerField(max_length=10, null=True,  blank=True)
-    nombre_empresa = models.CharField(max_length=100, null=True, blank=True ) 
-    nombre_proyecto = models.CharField(max_length=100, null=True, blank=True)
-    volumen_estimado = models.IntegerField(null=True,blank=True)
-    numero_tintas = models.IntegerField(null=True, blank=True)
-    tecnologia_fabricacion = models.CharField(max_length=100, null=True, blank=True)
-    lugar_entrega = models.CharField(max_length=100, null=True, blank=True)
-    producto_nuevo = models.BooleanField(default=False, null=True, blank=True)
-    fecha_solicitud = models.DateTimeField(default=datetime.now())
-    precio_objetivo = models.IntegerField(max_length=10, null=True, blank=True)
-    tipo_producto = models.CharField(max_length=100, null=True, blank=True)
-    comentarios_adicionales = models.TextField(max_length=300, blank=True, null=True) #por si existe algun requerimiento en especifico para el proyecto
-    frecuencia_compra = models.CharField(blank=True, max_length=100, null=True)
-    estatus=models.ManyToManyField(Status, related_name='status', blank=True) # El estatus se refiere al estado en el pipeline de ventas 
-    estado=models.CharField(max_length=10, choices=STATUS_CHOICES, default='pendiente', blank=True) #Este estado se refiere a la clasificacion de IDI. 
-    motivo_rechazo =models.CharField( blank=True, max_length=100)
     autor=models.ForeignKey(User, on_delete=models.SET_NULL, null=True) 
+    nombre_proyecto = models.CharField(max_length=100, null=True, blank=True)
+    numero_cotizacion = models.IntegerField( null=True,  blank=True)
+    nombre_empresa = models.ManyToManyField('empresas.Empresa') 
+    fecha_solicitud = models.DateTimeField(default=datetime.now())
+    comentarios_adicionales = models.TextField(max_length=300, blank=True, null=True) #por si existe algun requerimiento en especifico para el proyecto
+    estatus=models.ManyToManyField(Status, related_name='status', blank=True) # El estatus se refiere al estado en el pipeline de ventas 
     fecha_expiracion=models.DateTimeField(default=timezone.now() + timedelta (days=10))
     vigente=models.BooleanField(default=True, null=True) #Vigencia del check
-    cliente=models.CharField(max_length=100, null=True,  blank=True)
+    cliente=models.ForeignKey('clientes.Cliente', on_delete=models.CASCADE, null=True)
     categoria=models.ManyToManyField(Categoria, related_name='relevancia_check', blank=True) # relevancia de la categoria
     #Version del check - cada que haya un rechazo o debe agrearse la version 1.1 
     
@@ -72,7 +58,7 @@ class Check(models.Model):
             self.save()
     
     def renovar_expiracion(self):
-        self.fecha_expiracion= timezone.now() + timedelta(days=10)
+        self.fecha_expiracion= timezone.now() + timedelta(days=30)
         self.vigente=True
         self.save()
 

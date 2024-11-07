@@ -1,0 +1,23 @@
+<!-- deals/templates/deals/deal_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>{{ deal.title }}</h3>
+    </div>
+    <div class="card-body">
+        <p><strong>Descripción:</strong> {{ deal.description|default:"Sin descripción." }}</p>
+        <p><strong>Valor:</strong> ${{ deal.value }}</p>
+        <p><strong>Estado:</strong> {{ deal.get_status_display }}</p>
+        <p><strong>Creado:</strong> {{ deal.created_at|date:"d/m/Y H:i" }}</p>
+        <p><strong>Actualizado:</strong> {{ deal.updated_at|date:"d/m/Y H:i" }}</p>
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'deal_update' deal.pk %}" class="btn btn-warning">Editar</a>
+        <a href="{% url 'deal_delete' deal.pk %}" class="btn btn-danger">Eliminar</a>
+        <a href="{% url 'deal_list' %}" class="btn btn-secondary">Volver a la Lista</a>
+    </div>
+</div>
+{% endblock %}

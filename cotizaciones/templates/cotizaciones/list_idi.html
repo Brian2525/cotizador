@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% load static %}
+
+
+
+{% block content %}
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    
+                </div>
+            </nav>
+
+            <div class="container mt-5">
+                <h1>Checks</h1>
+                
+                <table class="table table-striped">
+                        {% if check %}
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Nombre de gerente</th>
+                                        
+                                        <th scope="col">Numero de cotizacion</th>
+                                        <th scope="col">Fecha de solicitud</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Fecha de expiracion</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                    </thead>
+                            {% for obj in check %}
+                                
+                                    <tbody>
+                                    <tr>
+                                     <th scope="row">{{obj.nombre_gerente}}</th>
+                                        <td>{{obj.numero_cotizacion}}</td>
+                                        <td> {{obj.fecha_solicitud }}</td>                               
+                                        {% for category in  obj.categoria.all %}
+                                        <td>  {{category.nombre}}  </td>
+                                        {%endfor %}
+                                        <td>{{obj.fecha_expiracion}}</td>
+                                        <td>
+                                        {%if obj.vigente %}
+                                        <a href="{% url 'verIdi' obj.id  %}">  <i class="bi bi-eye-fill"></i></a>
+                                        <a href="{% url 'editarIdi' obj.id  %}"> <i class="bi bi-pencil-square"></i></a>
+                                        
+                                        </td>
+                                        {% else %}
+                                        <td> <a href="{% url 'renovar' obj.id  %}">vencido </a> </td>
+                                        {% endif %}
+
+                                        
+                                    </tr>
+                                    </tbody>
+                               
+                            {% endfor %}
+                        {% else %}
+                        <h1>No hay elementos a mostrar</h1>
+                        {% endif %}
+                </table>
+                    
+                
+            </div>
+        </div>
+
+
+
+ {% endblock %}
+
+
+ 
+

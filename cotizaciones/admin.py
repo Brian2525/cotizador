@@ -1,11 +1,10 @@
 from django.contrib import admin
-from unfold.admin import ModelAdmin
 from .models import Check, Categoria, Status, Comentarios
 
 
 
-class CheckAdmin(ModelAdmin): 
-    list_display= ('id', 'nombre_empresa', 'numero_cotizacion')
+class CheckAdmin(admin.ModelAdmin): 
+    list_display= ('id','nombre_proyecto','cliente', 'numero_cotizacion')
 
 
 

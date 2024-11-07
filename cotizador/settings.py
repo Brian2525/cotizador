@@ -48,9 +48,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cotizaciones',
+    'vendedores',
     'clientes',
-    'bc',
-    'dashboard',
+    'productos',
+    'deals',
+    'empresas',
+    'sitioweb',
     
 ]
 
@@ -162,5 +165,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'cotizaciones'
 LOGOUT_REDIRECT_URL = 'login'

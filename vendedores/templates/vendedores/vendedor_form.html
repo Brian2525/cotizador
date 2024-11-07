@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Create{% endblock %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{% if form.instance.pk %}Editar Vendedor{% else %}Agregar Vendedor{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            {{ form.nombre}}
+        </div>
+        <div class="mb-3">
+            <label for="correo" class="form-label">Correo</label>
+            {{ form.correo }}
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            {{ form.telefono}}
+        </div>
+        <div class="mb-3">
+            <label for="sitio_web" class="form-label">Sitio Web</label>
+            {{ form.sitio_web}}
+        </div>
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            {{ form.direccion }}
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+</div>
+{% endblock %}
+

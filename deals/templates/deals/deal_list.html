@@ -1,0 +1,41 @@
+<!-- deals/templates/deals/deal_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="content" class="container">
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Mis Deals</h2>
+    <a href="{% url 'deal_create' %}" class="btn btn-primary">Crear Nuevo Deal</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Valor</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for deal in deals %}
+        <tr>
+            <td>{{ deal.title }}</td>
+            <td>${{ deal.value }}</td>
+            <td>{{ deal.get_status_display }}</td>
+            <td>
+                <a href="{% url 'deal_detail' deal.pk %}" class="btn btn-info btn-sm">Ver</a>
+                <a href="{% url 'deal_update' deal.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'deal_delete' deal.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center">No tienes deals registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

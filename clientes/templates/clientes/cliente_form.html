@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ form.instance.pk|yesno:"Editar,Crear" }} {{ form.instance.pk|yesno:"Empresa,Cliente" }}</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a href="{% if form.instance.pk %}{% url 'empresa_list' %}{% else %}{% url 'cliente_list' %}{% endif %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

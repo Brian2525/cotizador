@@ -3,11 +3,6 @@ from .models import Cliente
 
 # Register your models here.
 
-
-
-
-class ClienteAdmin(admin.ModelAdmin): 
-    list_display= ('nombre_cliente', 'empresa_cliente')
-    
-
-admin.site.register(Cliente, ClienteAdmin)
+class ClienteAdmin(admin.ModelAdmin):
+    list_display=('nombre', 'empresa')
+admin.site.register(Cliente)
