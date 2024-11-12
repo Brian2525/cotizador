@@ -1,0 +1,7 @@
+
+settings.py
+*.sqlite3
+*.txt
+*pyc 
+*.log
+.venv
