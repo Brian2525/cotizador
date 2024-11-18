@@ -25,3 +25,5 @@ media/
 # Ignorar el directorio de dependencias de Python (si usas venv en el proyecto)
 venv/
 env/
+
+*gitignore 
