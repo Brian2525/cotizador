@@ -26,4 +26,4 @@ media/
 venv/
 env/
 
-*gitignore 
+*.gitignore 
