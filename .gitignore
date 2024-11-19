@@ -1,6 +1,38 @@
+<<<<<<< HEAD
 
 *sqlite 
 settings.py 
 .log 
 *.txt
 .gitignore
+=======
+# Ignorar la base de datos SQLite
+*.sqlite3
+
+# Ignorar configuraciones de Django y variables de entorno
+*.env
+**/settings.py
+
+# Ignorar migraciones y otros archivos de configuración local
+**/migrations/
+*.log
+*.pot
+*.pyc
+__pycache__/
+
+# Ignorar archivos estáticos generados y media subidos por usuarios
+staticfiles/
+media/
+
+# Ignorar archivos y configuraciones de IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignorar el directorio de dependencias de Python (si usas venv en el proyecto)
+venv/
+env/
+
+*.gitignore 
+>>>>>>> d6f85d3c703dc4bf48fc21c19564b2742246d965
