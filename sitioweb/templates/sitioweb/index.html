@@ -88,7 +88,7 @@
 									<a href="#" class="menu-link" data-href="#section-faqs"><div>FAQs</div></a>
 								</li>
 								<li class="menu-item">
-									<a href="#" class="menu-link" data-href="#section-blog"><div>Blog</div></a>
+									<a href="{% url 'blog_list' %} " class="menu-link" data-href="#section-blog"><div>Blog</div></a>
 								</li>
 							</ul>
 
@@ -616,7 +616,7 @@
 						<div class="text-center mb-5">
 							<h3 class="display-4 fw-bolder ls1 mb-3 position-relative"><span class=" gradient-color">Blog</span> </h3>
 							<p class="lead">¡No te pierdas nuestros últimos consejos! Explora el blog y descubre cómo implementar asistentes GPT personalizados para potenciar tu proyecto..</p>
-							<a href="#" class="button button-border button-large rounded-pill m-0">Ver todos los post</a>
+							<a href="{% url 'blog_list' %}" class="button button-border button-large rounded-pill m-0">Ver todos los post</a>
 						</div>
 
 						<div class="row align-items-stretch g-4">
@@ -629,6 +629,7 @@
 									</div>
 									<div class="entry-desc mb-auto">
 										<div class="badge text-bg-primary text-light rounded-pill fw-normal mb-2">Productividad</div>
+										<div class="badge text-bg-warning text-light rounded-pill fw-normal mb-2">Idiomas</div>
 										<div class="entry-title">
 											<h3 class="mb-0 fs-5 font-body fw-medium"><a href="#">Con este asistente de chat gpt podras agendar llamadas y reuniones</a></h3>
 										</div>
@@ -757,7 +758,7 @@
 
 						<div class="col-lg-6 text-center text-lg-end">
 							<div class="copyright-links mt-0">
-								<a href="#">Politica de privacidad </a>
+								<a href="{% url 'privacy'%} ">Politica de privacidad </a>
 								<a href="#">Terminos  &amp; Condiciones </a>
 							</div>
 						</div>

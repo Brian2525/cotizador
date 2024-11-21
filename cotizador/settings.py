@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'deals',
     'empresas',
     'sitioweb',
+    'blog',
     
 ]
 

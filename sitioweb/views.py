@@ -7,3 +7,6 @@ from django.shortcuts import render
 
 def index(request):
     return render(request, 'sitioweb/index.html')
+
+def privacy(request):
+    return render(request, 'sitioweb/privacy.html')

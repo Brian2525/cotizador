@@ -1,0 +1,278 @@
+<!-- app1/templates/app1/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%load static%}
+    <title>{% block title %} {% endblock %}</title>
+
+    
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge">
+	<meta name="author" content="Nuplee.comm">
+	<meta name="description" content="Asistente de IA 24/7 para Atención Personalizada">
+
+	<!-- Font Imports -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'blog/css/font-icons.css' %} ">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+</head>
+<body class="stretched">
+
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper">
+
+		<!-- Header
+		============================================= -->
+		<header id="header" class="full-header">
+			<div id="header-wrap">
+				<div class="container">
+					<div class="header-row">
+
+						<!-- Logo
+						============================================= -->
+						<div id="logo">
+							<a href="index.html">
+								<img class="logo-default" srcset="images/logo.png, images/logo@2x.png 2x" src="images/logo@2x.png" alt="Canvas Logo">
+								<img class="logo-dark" srcset="images/logo-dark.png, images/logo-dark@2x.png 2x" src="images/logo-dark@2x.png" alt="Canvas Logo">
+							</a>
+						</div><!-- #logo end -->
+
+						<div class="header-misc">
+
+							
+
+							<!-- Top Cart
+							============================================= -->
+							<div id="top-cart" class="header-misc-icon d-none d-sm-block">
+								<a href="#" id="top-cart-trigger"><i class="uil uil-shopping-bag"></i><span class="top-cart-number">5</span></a>
+								<div class="top-cart-content">
+									<div class="top-cart-title">
+										<h4>Shopping Cart</h4>
+									</div>
+									<div class="top-cart-items">
+										<div class="top-cart-item">
+											<div class="top-cart-item-image">
+												<a href="#"><img src="images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt"></a>
+											</div>
+											<div class="top-cart-item-desc">
+												<div class="top-cart-item-desc-title">
+													<a href="#">Blue Round-Neck Tshirt with a Button</a>
+													<span class="top-cart-item-price d-block">$19.99</span>
+												</div>
+												<div class="top-cart-item-quantity">x 2</div>
+											</div>
+										</div>
+										<div class="top-cart-item">
+											<div class="top-cart-item-image">
+												<a href="#"><img src="images/shop/small/6.jpg" alt="Light Blue Denim Dress"></a>
+											</div>
+											<div class="top-cart-item-desc">
+												<div class="top-cart-item-desc-title">
+													<a href="#">Light Blue Denim Dress</a>
+													<span class="top-cart-item-price d-block">$24.99</span>
+												</div>
+												<div class="top-cart-item-quantity">x 3</div>
+											</div>
+										</div>
+									</div>
+									<div class="top-cart-action">
+										<span class="top-checkout-price">$114.95</span>
+										<a href="#" class="button button-3d button-small m-0">View Cart</a>
+									</div>
+								</div>
+							</div><!-- #top-cart end -->
+
+						</div>
+
+						<div class="primary-menu-trigger">
+							<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+								<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+							</button>
+						</div>
+
+						<!-- Primary Navigation
+						============================================= -->
+						<nav class="primary-menu">
+
+							<ul class="menu-container">
+								
+								<li class="menu-item mega-menu">
+									<a class="menu-link" href="#"><div>Shortcodes</div></a>
+									
+								</li>
+							</ul>
+
+						</nav><!-- #primary-menu end -->
+
+					</div>
+				</div>
+			</div>
+			<div class="header-wrap-clone"></div>
+		</header><!-- #header end -->
+
+		<!-- Page Title
+		============================================= -->
+		<section class="page-title bg-transparent">
+			<div class="container">
+				<div class="page-title-row">
+
+					<div class="page-title-content">
+						<h1>Blog</h1>
+						<span>Dia a dia de la inteligencia artificial </span>
+					</div>
+
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="{% url 'index'%} ">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page"><a href= "{% url 'blog_list' %}"> Blog</a></li>
+						</ol>
+					</nav>
+
+				</div>
+			</div>
+		</section><!-- .page-title end -->
+
+		<!-- Content
+		============================================= -->
+		<section id="content">
+			<div class="content-wrap">
+				<div class="container">
+				<div id="posts" class="post-grid row gutter-50">
+				{%for post in posts %}
+				
+						<div class="entry col-sm-6 col-12">
+							<div class="grid-inner">
+								<div class="entry-image">
+									<img src="{{post.imagen_principal.url}}" alt="{{post.titulo}} ">
+								</div>
+								<div class="entry-title">
+									<h2><a href="{% url 'post_detail' slug=post.slug %}">{{post.titulo}} </a></h2>
+								</div>
+								<div class="entry-meta">
+									<ul>
+										<li><i class="uil uil-schedule"></i> {{post.fecha_publicacion}} </li>
+										
+										<li><a href="#"><i class="uil uil-camera"></i></a></li>
+									</ul>
+								</div>
+								<div class="entry-content">
+									<p>{{post.contenido |slice:":500" }} </p>
+									<a href="{% url 'post_detail' slug=post.slug %} " class="more-link">Leer más </a>
+								</div>
+							</div>
+						</div>
+					
+
+				{%endfor%}
+				</div>
+					<!-- Pagination
+					============================================= -->
+					<div class="d-flex justify-content-between mt-5">
+						<a href="#" class="btn btn-outline-secondary">&larr; Older</a>
+						<a href="#" class="btn btn-outline-dark">Newer &rarr;</a>
+					</div>
+					<!-- .pager end -->
+
+				</div>
+			</div>
+		</section><!-- #content end -->
+
+		<!-- Footer
+		============================================= -->
+		<footer id="footer" class="bg-transparent border-top-0">
+			<div class="container">
+
+				<!-- Footer Widgets
+				============================================= -->
+				<div class="footer-widgets-wrap py-0">
+					<div class="row align-items-center justify-content-center g-4 mb-5 mb-lg-0">
+						<div class="col-lg-4 text-center text-lg-start" data-class="down-lg:order-2 down-lg:mt-0">
+							<div class="d-inline-flex gap-4">
+								<a href="#" class="text-contrast-700 h-text-color">About</a>
+								<a href="#" class="text-contrast-700 h-text-color">Blog</a>
+								<a href="#" class="text-contrast-700 h-text-color">Help Center</a>
+							</div>
+						</div>
+						<div class="col-lg-4 text-center" data-class="down-lg:order-1">
+							<img srcset="images/logo.png, images/logo@2x.png 2x" src="images/logo@2x.png" alt="Canvas Logo Footer">
+						</div>
+						<div class="col-lg-4 text-center text-lg-end" data-class="down-lg:order-3">
+							<div class="d-inline-flex justify-content-center">
+								<a href="#" class="social-icon si-small text-white rounded-circle bg-facebook" title="Facebook">
+									<i class="fa-brands fa-facebook-f"></i>
+									<i class="fa-brands fa-facebook-f"></i>
+								</a>
+
+								<a href="#" class="social-icon si-small text-white rounded-circle bg-x-twitter" title="Twitter">
+									<i class="fa-brands fa-x-twitter"></i>
+									<i class="fa-brands fa-x-twitter"></i>
+								</a>
+
+								<a href="#" class="social-icon si-small text-white rounded-circle bg-pinterest" title="Pinterest">
+									<i class="fa-brands fa-pinterest-p"></i>
+									<i class="fa-brands fa-pinterest-p"></i>
+								</a>
+
+								<a href="#" class="social-icon si-small text-white rounded-circle bg-whatsapp" title="Whatsapp">
+									<i class="fa-brands fa-whatsapp"></i>
+									<i class="fa-brands fa-whatsapp"></i>
+								</a>
+
+								<a href="#" class="social-icon si-small text-white rounded-circle bg-rss" title="RSS">
+									<i class="fa-solid fa-rss"></i>
+									<i class="fa-solid fa-rss"></i>
+								</a>
+
+								<a href="#" class="social-icon si-small text-white rounded-circle bg-email3 me-0" title="Mail">
+									<i class="fa-solid fa-envelope"></i>
+									<i class="fa-solid fa-envelope"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div><!-- .footer-widgets-wrap end -->
+
+				<!-- Copyrights
+				============================================= -->
+				<div id="copyrights" class="bg-transparent border-top">
+					<div class="row g-3">
+						<div class="col-lg-6 text-center text-lg-start">
+							Copyrights &copy; 2023 All Rights Reserved by Canvas Inc.
+						</div>
+
+						<div class="col-lg-6 text-center text-lg-end">
+							<div class="copyright-links mt-0">
+								<a href="#">Privacy Policy</a>
+								<a href="#">Terms &amp; Conditions</a>
+							</div>
+						</div>
+					</div>
+				</div><!-- #copyrights end -->
+
+			</div>
+		</footer><!-- #footer end -->
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="uil uil-angle-up"></div>
+
+	<!-- JavaScripts
+	============================================= -->
+	<script src="{% static 'blog/js/plugins.min.js'%}"></script>
+	<script src=" {% static 'blog/js/functions.bundle.js'%}"></script>
+
+</body>
+</html>
