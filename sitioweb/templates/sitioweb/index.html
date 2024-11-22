@@ -618,71 +618,41 @@
 							<p class="lead">¡No te pierdas nuestros últimos consejos! Explora el blog y descubre cómo implementar asistentes GPT personalizados para potenciar tu proyecto..</p>
 							<a href="{% url 'blog_list' %}" class="button button-border button-large rounded-pill m-0">Ver todos los post</a>
 						</div>
-
+						
 						<div class="row align-items-stretch g-4">
+						{% for post in recent_posts %}
 							<div class="col-lg-4">
 								<div class="entry d-flex flex-column h-100 mb-0 bg-contrast-0 p-4 rounded-xxl" style="--cnvs-post-item-margin:0;">
 									<div class="entry-image mb-3">
-										<a href="#">
-											<img src="{% static 'sitioweb/images/new/blogs/1.svg'%}" alt="Image 3" class="rounded-6">
+										<a href="{% url 'post_detail' post.slug %} ">
+											<img src="{{post.imagen_thumbnail.url}}" alt="{{post.titulo}}" class="rounded-6">
 										</a>
 									</div>
 									<div class="entry-desc mb-auto">
 										<div class="badge text-bg-primary text-light rounded-pill fw-normal mb-2">Productividad</div>
-										<div class="badge text-bg-warning text-light rounded-pill fw-normal mb-2">Idiomas</div>
-										<div class="entry-title">
-											<h3 class="mb-0 fs-5 font-body fw-medium"><a href="#">Con este asistente de chat gpt podras agendar llamadas y reuniones</a></h3>
-										</div>
-									</div>
-									<div class="d-flex text-contrast-600 border-top mt-3 pt-3 small">
-										<span>2 days ago</span>
-										<span class="mx-2">&middot;</span>
-										<span>5 min read</span>
-									</div>
-								</div>
-							</div>
+										
+										{% for tag in post.tags.all %}
+												<div class="badge text-bg-warning text-light rounded-pill fw-normal mb-2">{{ tag.nombre }}</div>{% if not forloop.last %}, {% endif %}
+											{% endfor %}
+										
 
-							<div class="col-lg-4">
-								<div class="entry d-flex flex-column h-100 mb-0 bg-contrast-0 p-4 rounded-xxl" style="--cnvs-post-item-margin:0;">
-									<div class="entry-image mb-3">
-										<a href="#">
-											<img src="{% static 'sitioweb/images/new/blogs/2.svg'%}" alt="Image 3" class="rounded-6"><!--Imagen-->
-										</a>
-									</div>
-									<div class="entry-desc mb-auto">
-										<div class="badge text-bg-warning text-light rounded-pill fw-normal mb-2">Idiomas</div><!--Categoria-->
-										<div class="entry-title">
-											<h3 class="mb-0 fs-5 font-body fw-medium"><a href="#">Con este asistente GPT podras dar seguimiento y realizar examenes a tus estudiantes.</a></h3><!--Descripción-->
-										</div>
-									</div>
-									<div class="d-flex text-contrast-600 border-top mt-3 pt-3 small">
-										<span>3 days ago</span><!--Fecha-->
-										<span class="mx-2">&middot;</span>
-										<span>6 min read</span><!--Tiempo de lectura aproximado-->
-									</div>
-								</div>
-							</div>
 
-							<div class="col-lg-4">
-								<div class="entry d-flex flex-column h-100 mb-0 bg-contrast-0 p-4 rounded-xxl" style="--cnvs-post-item-margin:0;">
-									<div class="entry-image mb-3">
-										<a href="#">
-											<img src="{% static 'sitioweb/images/new/blogs/3.svg'%}" alt="Image 3" class="rounded-6">
-										</a>
-									</div>
-									<div class="entry-desc mb-auto">
-										<div class="badge text-bg-danger text-light rounded-pill fw-normal mb-2">Progamación</div>
+
 										<div class="entry-title">
-											<h3 class="mb-0 fs-5 font-body fw-medium"><a href="#">Crea ejercicios de programacion para cada uno de los estudiantes</a></h3>
+											<h3 class="mb-0 fs-5 font-body fw-medium"><a href="{% url 'post_detail' post.slug %}">{{post.titulo}} </a></h3>
 										</div>
 									</div>
 									<div class="d-flex text-contrast-600 border-top mt-3 pt-3 small">
-										<span>3 days ago</span>
+										<span>{{post.fecha_publicacion |date:"F j, Y"}} </span>
 										<span class="mx-2">&middot;</span>
-										<span>6 min read</span>
+										<span>{{post.tiempo_lectura}}  min lectura</span>
 									</div>
 								</div>
 							</div>
+						{% endfor %}
+
+							
+
 						</div>
 
 						<div class="row justify-content-center text-center p-lg-6 p-5 rounded-xxl gx-0 dark mt-5 mt-lg-6" style="background: url('{%static 'sitioweb/images/new/footer-promo.svg'%}'); background-position: center center; background-size: cover;">

@@ -18,3 +18,4 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'autor', 'categoria', 'fecha_publicacion')
     list_filter = ('categoria', 'tags', 'fecha_publicacion')
     search_fields = ('titulo', 'contenido')
+
