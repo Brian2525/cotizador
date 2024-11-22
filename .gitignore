@@ -12,6 +12,7 @@ settings.py
 # Ignorar configuraciones de Django y variables de entorno
 *.env
 **/settings.py
+settingsProduccion.py
 
 # Ignorar migraciones y otros archivos de configuración local
 **/migrations/
