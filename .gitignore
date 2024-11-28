@@ -8,6 +8,7 @@ settings.py
 =======
 # Ignorar la base de datos SQLite
 *.sqlite3
+*.txt
 
 # Ignorar configuraciones de Django y variables de entorno
 *.env
