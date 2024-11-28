@@ -121,7 +121,7 @@
 									</ul>
 								</div>
 								<div class="entry-content">
-									<p>{{post.contenido |slice:":200" }} </p>
+									<p>{{post.contenido | slice:":200" |safe }} </p>
 									<a href="{% url 'post_detail' slug=post.slug %} " class="more-link">Leer más </a>
 								</div>
 							</div>
