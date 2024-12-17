@@ -31,7 +31,7 @@ import os
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.template.loader import get_template, render_to_string
-from xhtml2pdf import pisa
+#from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
 
 #CRUD Usuario Gerente
@@ -264,7 +264,7 @@ def register(request):
 
 
 
-
+'''
 
 
 class PdfView(View): 
@@ -300,7 +300,9 @@ class PdfView(View):
                     )
             return path
    
-    def get(self,request, *args, **kwargs): 
+    def get(self,request, *args, **kwargs):     
+
+
         imagen_url= '{}{}'.format(settings.MEDIA_URL, 'img/logo.png') 
         print(imagen_url)
         try:  
@@ -323,3 +325,6 @@ class PdfView(View):
         except: 
             pass
         return HttpResponseRedirect(reverse_lazy('cotizaciones'))
+    
+
+    '''
