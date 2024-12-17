@@ -28907,16 +28907,15 @@ blockquote.float-end {
 	Go To Top
 -----------------------------------------------------------------*/
 #gotoTop {
-  --cnvs-gotoTop-size: 2.5rem;
+  --cnvs-gotoTop-size: 3.5rem; /* Increased size for better visibility */
   --cnvs-gotoTop-bg: rgba(0, 0, 0, 0.3);
-  --cnvs-gotoTop-icon-size: 1.5rem;
+  --cnvs-gotoTop-icon-size: 2rem; /* Adjust icon size */
   --cnvs-gotoTop-icon-color: #fff;
   --cnvs-gotoTop-position-boxed-right: 30px;
   --cnvs-gotoTop-position-boxed-bottom: 50px;
-  --cnvs-gotoTop-position-botom: 30px;
-  --cnvs-gotoTop-border-radius: 2px;
-  --cnvs-gotoTop-hover-color: var(--cnvs-themecolor);
-  z-index: -999;
+  --cnvs-gotoTop-border-radius: 50%; /* Make it circular */
+  --cnvs-gotoTop-hover-color: #25d366; /* WhatsApp green color */
+  z-index: 999;
   position: fixed;
   width: var(--cnvs-gotoTop-size);
   height: var(--cnvs-gotoTop-size);

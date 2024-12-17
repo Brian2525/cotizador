@@ -11,6 +11,10 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Cookie&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 
 	<!-- Core Style -->
 
@@ -54,9 +58,9 @@
 						<!-- Logo
 						============================================= -->
 						<div id="logo" class="col-lg-2 me-lg-auto">
-							<a href="index.html" class="w-auto">
-								<img class="logo-default" srcset="{% static 'sitioweb/images/logo.png' %}, {% static 'sitioweb/images/logo.png' %} 2x" src="{% static 'sitiowebimages/logo@2x.png' %}" alt="Canvas Logo">
-								<img class="logo-dark" srcset="{% static 'sitioweb/images/logo-dark.png' %}, {% static 'sitioweb/images/logo-dark@2x.png 2x' %}" src="{% static 'sitioweb/images/logo-dark@2x.png' %}" alt="Canvas Logo">
+							<a href="{% url 'index' %} " class="w-auto">
+								<img class="logo-default" srcset="{% static 'sitioweb/images/logo_nuplee.png' %}, {% static 'sitioweb/images/logo_nuplee.png' %} 2x" src="{% static 'sitiowebimages/logo_nuplee@2x.png' %}" alt="Canvas Logo">
+								<img class="logo-dark" srcset="{% static 'sitioweb/images/logo_nuplee.png' %}, {% static 'sitioweb/images/logo_nuplee-dark@2x.png 2x' %}" src="{% static 'sitioweb/images/logo_nuplee-dark@2x.png' %}" alt="Canvas Logo">
 							</a>
 						</div><!-- #logo end -->
 
@@ -684,12 +688,12 @@
 						<div class="col-lg-4 text-center text-lg-start" data-class="down-lg:order-2 down-lg:mt-0">
 							<div class="d-inline-flex gap-4">
 								<a href="#" class="text-contrast-700 h-text-color">Inicio</a>
-								<a href="#" class="text-contrast-700 h-text-color">Iniciar sesion</a>
+								<a href="{% url 'login' %}" class="text-contrast-700 h-text-color">Iniciar sesion</a>
 								
 							</div>
 						</div>
 						<div class="col-lg-4 text-center" data-class="down-lg:order-1">
-							<img srcset="images/logo.png, images/logo@2x.png 2x" src="images/logo@2x.png" alt="Logo">
+							<img srcset="{% static 'sitioweb/images/logo_nuplee.png' %}" alt="Logo Nuplee">
 						</div>
 						<div class="col-lg-4 text-center text-lg-end" data-class="down-lg:order-3">
 							<div class="d-inline-flex justify-content-center">
@@ -698,17 +702,6 @@
 									<i class="fa-brands fa-facebook-f"></i>
 								</a>
 
-								<a href="#" class="social-icon si-small text-white rounded-circle bg-x-twitter" title="Twitter">
-									<i class="fa-brands fa-x-twitter"></i>
-									<i class="fa-brands fa-x-twitter"></i>
-								</a>
-
-							
-
-								<a href="#" class="social-icon si-small text-white rounded-circle bg-whatsapp" title="Whatsapp">
-									<i class="fa-brands fa-whatsapp"></i>
-									<i class="fa-brands fa-whatsapp"></i>
-								</a>
 								<a href="#" class="social-icon si-small text-white rounded-circle bg-email3 me-0" title="Mail">
 									<i class="fa-solid fa-envelope"></i>
 									<i class="fa-solid fa-envelope"></i>
@@ -737,11 +730,25 @@
 
 			</div>
 		</footer><!-- #footer end -->
+
+
+
+		
 	</div><!-- #wrapper end -->
 
 	<!-- Go To Top
 	============================================= -->
-	<div id="gotoTop" class="uil uil-angle-up rounded-circle bg-color h-bg-dark"></div>
+	<div id="gotoTop" class="uil uil-angle-up  bg-color h-bg-dark"></div>
+
+	<a href="https://wa.me/+5214411533872?text=Hola%2C%20quisiera%20informacion%20de%20sus%20servicios!" 
+	class="whatsapp-widget" 
+	target="_blank" 
+	title="Habla con nosotros " 
+	id="gotoTop">
+	<i class="fab fa-whatsapp"></i>
+	</a>
+
+
 
 	<!-- JavaScripts
 	============================================= -->
