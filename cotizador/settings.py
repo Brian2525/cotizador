@@ -32,6 +32,10 @@ SECRET_KEY = 'django-insecure-!gpi-)!&qv%564=7(-eft&2p^s4u3-zm=)$8lt4520ihwri5w=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+
+CSRF_COOKIE_SECURE = False
+
 ALLOWED_HOSTS = ['*']
 
 
@@ -56,6 +60,7 @@ INSTALLED_APPS = [
     'empresas',
     'sitioweb',
     'blog',
+    'assistant',
     
 ]
 

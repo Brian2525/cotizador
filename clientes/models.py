@@ -18,9 +18,8 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length=255)
     mail = models.EmailField()
     telefono = models.CharField(max_length=15)
-    empresa = models.ForeignKey('empresas.Empresa', on_delete=models.CASCADE, null=True, blank=True)  # En el futuro podría ser una ForeignKey a Empresa
-    posicion=models.CharField(max_length=255, null=True, default='Desconocido')
-    encargado_cuenta = models.ManyToManyField(User, null=True)
+    empresa = models.CharField(max_length=255, null=True, blank=True)  # Ya no es una relación, solo texto
+    posicion = models.CharField(max_length=255, null=True, default='Desconocido')
     etapa = models.CharField(max_length=50, choices=ETAPAS, default='inicial')
 
     def __str__(self):

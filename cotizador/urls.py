@@ -32,6 +32,7 @@ urlpatterns = [
     path('', include('deals.urls')),
     path('', include('sitioweb.urls')),
     path('', include('blog.urls')),
+    path('', include('assistant.urls')),
 
 
 ]

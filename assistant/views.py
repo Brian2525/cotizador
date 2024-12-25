@@ -1,38 +1,42 @@
-from django.shortcuts import render
 
-#Import OPEN_AI KEY 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from clientes.models import Cliente
 
-from openai import OpenAI
-client = OpenAI( )
+# esta app será la que registrará a a los leads en el CRM y los clasificará. 
+#Import Model of deals - 
+#Create a function that receives the clients or  prospects from the chatbot - whatsapp 
 
+@csrf_exempt  # Permite solicitudes sin token CSRF (útil para API)
+def create_cliente(request):
+    if request.method == 'POST':
+        try:
+                # Intentamos cargar los datos JSON enviados en la solicitud
+            data = json.loads(request.body)
+            print("1")
+                # Creamos el nuevo cliente con los datos del JSON
+            cliente = Cliente(
+                        nombre=data.get('nombre'),
+                        mail=data.get('mail'),
+                        telefono=data.get('telefono'), 
+                        empresa=data.get('empresa'),  # Campo de empresa como texto
+                        posicion=data.get('posicion', 'Desconocido'),
+                        etapa=data.get('etapa', 'inicial'),
+                    )
 
-# Create your views here.
+                    # Guardamos el cliente
+            cliente.save()
+            print(cliente)
+            print("2")
 
-#1.- Create a conexion with open ai 
-# Create  thread 
+                    # Devolvemos una respuesta exitosa
+            return JsonResponse({'message': 'Cliente created successfully!', 'id': cliente.id}, status=201)
+                
+        except json.JSONDecodeError:
+                    # Si no se pudo parsear el JSON, devolvemos un error
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
 
-empty_thread = client.beta.threads.create()
-
-# Create a  Messages 
-thread_message = client.beta.threads.messages.create(
-  "thread_abc123",
-  role="user",
-  content="How does AI work? Explain it in simple terms.",
-)
-
-
-# Create a run 
-
-stream = client.beta.threads.runs.create(
-  thread_id="thread_123",
-  assistant_id="asst_123",
-  stream=True
-)
-
-for event in stream:
-
-# Read the response 
-
-#2.- Create a chatbot with user 
-
-#
+    else:
+                # Si el método no es POST, devolvemos un error
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
