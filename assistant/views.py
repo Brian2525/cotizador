@@ -21,6 +21,7 @@ def create_cliente(request):
                         mail=data.get('mail'),
                         telefono=data.get('telefono'), 
                         empresa=data.get('empresa'),  # Campo de empresa como texto
+                        asunto=data.get('asunto'),
                         posicion=data.get('posicion', 'Desconocido'),
                         etapa=data.get('etapa', 'inicial'),
                     )

@@ -18,7 +18,8 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length=255)
     mail = models.EmailField()
     telefono = models.CharField(max_length=15)
-    empresa = models.CharField(max_length=255, null=True, blank=True)  # Ya no es una relación, solo texto
+    empresa = models.CharField(max_length=255, null=True, blank=True)
+    asunto=models.CharField(max_length=255, null=True, blank=True)
     posicion = models.CharField(max_length=255, null=True, default='Desconocido')
     etapa = models.CharField(max_length=50, choices=ETAPAS, default='inicial')
 
