@@ -18,9 +18,6 @@ from django.contrib import messages
 #weasy HTML to PDF 
 import functools
 
-from django.conf import settings
-
-
 from cotizador.wsgi import *
 from cotizador import settings
 
@@ -31,27 +28,46 @@ import os
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.template.loader import get_template, render_to_string
-#from xhtml2pdf import pisa
+from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
+
+
+#Intentar llenar el Check desde json 
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+
 
 #CRUD Usuario Gerente
 
-class Check_control(LoginRequiredMixin): 
-    @login_required
+class Check_control(LoginRequiredMixin):   # Esto permite solicitudes POST sin un token CSRF (útil para API)
+    @csrf_exempt
     def create_check(request):
-        form=CheckForm()
-        if request.user.is_authenticated:
-            if request.method=='POST': 
-                form=CheckForm(data=request.POST)
-                if form.is_valid():
-                    form.instance.autor = request.user
-                    form.save()
-                return redirect('cotizaciones') 
+            if request.method == 'POST':
+                try:
+                    # Intentamos cargar los datos JSON enviados en la solicitud
+                    data = json.loads(request.body)
+
+                    # Rellenamos el formulario con los datos del JSON
+                    form = CheckForm(data=data)
+
+                    if form.is_valid():
+                        # Si el formulario es válido, asignamos el autor (el usuario actual)
+                       
+                        form.save()
+
+                        # Retornamos una respuesta de éxito con el id del nuevo registro
+                        return JsonResponse({'message': 'Check created successfully!', 'id': form.instance.id}, status=201)
+                    else:
+                        # Si el formulario no es válido, devolvemos los errores
+                        return JsonResponse({'errors': form.errors}, status=400)
+
+                except json.JSONDecodeError:
+                    # Si no se pudo parsear el JSON, devolvemos un error
+                    return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
             else:
-                form=CheckForm()
-            return render(request, 'cotizaciones/create.html', {'form': form })
-        else: 
-            return redirect('/accounts/login/')
+                return JsonResponse({'error': 'Invalid request method'}, status=405)
     
 
 
@@ -264,9 +280,6 @@ def register(request):
 
 
 
-'''
-
-
 class PdfView(View): 
     
     def link_callback(uri, rel):
@@ -327,4 +340,4 @@ class PdfView(View):
         return HttpResponseRedirect(reverse_lazy('cotizaciones'))
     
 
-    '''
+   

@@ -30,9 +30,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!gpi-)!&qv%564=7(-eft&2p^s4u3-zm=)$8lt4520ihwri5w='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['143.198.146.0', 'localhost','nuplee.com' ,'http://nuplee.com/', 'https://nuplee.com/']
+
+CSRF_COOKIE_SECURE = False
 
 
 # Application definition
@@ -56,6 +58,7 @@ INSTALLED_APPS = [
     'empresas',
     'sitioweb',
     'blog',
+    'assistant',
     
 ]
 
